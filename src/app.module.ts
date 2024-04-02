@@ -8,6 +8,8 @@ import { HealthService, UsersService } from './services';
 import { HealthMiddleware } from './middlewares/health.middleware';
 import { PingController, UserController } from './controllers';
 import { ResponseUtil } from './utils/response.util';
+import UserSchema from './schema/users.schema';
+import { MODEL_NAMES } from './constants';
 
 @Module({
   imports: [
@@ -16,6 +18,7 @@ import { ResponseUtil } from './utils/response.util';
       retryAttempts: Number.MAX_VALUE,
       retryDelay: 1000,
     }),
+    MongooseModule.forFeature([{ name: 'users', schema: UserSchema }])
   ],
   controllers: [AppController, PingController, UserController],
   providers: [AppService, HealthService, ResponseUtil, UsersService],

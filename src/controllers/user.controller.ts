@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 import { HealthService, UsersService } from '../services';
 import { ResponseUtil } from '../utils/response.util';
 
@@ -7,17 +7,18 @@ export class UserController {
   constructor(
     private readonly healthService: HealthService,
     private readonly responseUtil: ResponseUtil,
-    private readonly usersService:UsersService
-  ) {}
+    private readonly usersService: UsersService
+  ) { }
 
-  @Get('/info')
-  async ping(@Req() req: any, @Res() res: any) {
-    const result = await this.healthService.ping();
+  // truyen token . chua lam phan quyen 
+  @Get('/:id')
+  async infoUser(@Param('id') id: string, @Res() res: any) {
+    const result = await this.usersService.getUser(id);
     return this.responseUtil.success({ res, data: result });
   }
 
   @Post('/login')
-  async login(@Body() body: any,  @Res() res: any){
+  async login(@Body() body: any, @Res() res: any) {
     const result = await this.usersService.login(body);
     return this.responseUtil.success({ res, data: result });
   }
