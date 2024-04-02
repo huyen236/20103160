@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { APP_CONFIG } from 'config';
-import { HealthService } from './services';
+import { HealthService, UsersService } from './services';
 import { HealthMiddleware } from './middlewares/health.middleware';
 import { PingController, UserController } from './controllers';
 import { ResponseUtil } from './utils/response.util';
@@ -18,7 +18,7 @@ import { ResponseUtil } from './utils/response.util';
     }),
   ],
   controllers: [AppController, PingController, UserController],
-  providers: [AppService, HealthService, ResponseUtil],
+  providers: [AppService, HealthService, ResponseUtil, UsersService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
