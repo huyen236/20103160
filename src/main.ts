@@ -18,16 +18,13 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
   if (APP_CONFIG.env !== ENViRONMENT.DEV) {
-    const SoftPosSwaggerConfig = new DocumentBuilder()
+    const TopCVSwaggerConfig = new DocumentBuilder()
       .setTitle('Softpos tap 2 phone')
       .setDescription('Softpos tap 2 phone')
       .setVersion('1.0')
       .build();
-    const softPosDocument = SwaggerModule.createDocument(
-      app,
-      SoftPosSwaggerConfig,
-    );
-    SwaggerModule.setup('swagger-docs', app, softPosDocument);
+    const topCVocument = SwaggerModule.createDocument(app, TopCVSwaggerConfig);
+    SwaggerModule.setup('swagger-docs', app, topCVocument);
   }
   // app.useGlobalInterceptors(new DefaultInterceptor() as any);
   await app.listen(APP_CONFIG.port || 3000);
