@@ -10,6 +10,7 @@ import { PingController, UserController } from './controllers';
 import { ResponseUtil } from './utils/response.util';
 import UserSchema from './schema/users.schema';
 import { MODEL_NAMES } from './constants';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { MODEL_NAMES } from './constants';
     MongooseModule.forFeature([{ name: 'users', schema: UserSchema }])
   ],
   controllers: [AppController, PingController, UserController],
-  providers: [AppService, HealthService, ResponseUtil, UsersService],
+  providers: [AppService, HealthService, ResponseUtil, UsersService, JwtService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
