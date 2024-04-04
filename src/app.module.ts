@@ -1,16 +1,26 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { APP_CONFIG } from 'config';
-import { HealthService, UsersService } from './services';
+import {
+  CompanysService,
+  HealthService,
+  JobsService,
+  UsersService,
+} from './services';
 import { HealthMiddleware } from './middlewares/health.middleware';
-import { PingController, UserController } from './controllers';
+import {
+  CompanyController,
+  JobController,
+  PingController,
+  UserController,
+} from './controllers';
 import { ResponseUtil } from './utils/response.util';
-import UserSchema from './schema/users.schema';
 import { MODEL_NAMES } from './constants';
 import { JwtService } from '@nestjs/jwt';
+import UserSchema from './schema/users.schema';
+import JobSchema from './schema/jobs.schema';
+import CompanySchema from './schema/company.schema';
 
 @Module({
   imports: [
@@ -19,10 +29,26 @@ import { JwtService } from '@nestjs/jwt';
       retryAttempts: Number.MAX_VALUE,
       retryDelay: 1000,
     }),
-    MongooseModule.forFeature([{ name: 'users', schema: UserSchema }])
+    MongooseModule.forFeature([
+      { name: 'users', schema: UserSchema },
+      { name: 'jobs', schema: JobSchema },
+      { name: 'company', schema: CompanySchema },
+    ]),
   ],
-  controllers: [AppController, PingController, UserController],
-  providers: [AppService, HealthService, ResponseUtil, UsersService, JwtService],
+  controllers: [
+    PingController,
+    UserController,
+    JobController,
+    CompanyController,
+  ],
+  providers: [
+    HealthService,
+    ResponseUtil,
+    UsersService,
+    JwtService,
+    CompanysService,
+    JobsService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
