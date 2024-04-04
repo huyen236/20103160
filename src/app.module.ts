@@ -21,6 +21,7 @@ import { JwtService } from '@nestjs/jwt';
 import UserSchema from './schema/users.schema';
 import JobSchema from './schema/jobs.schema';
 import CompanySchema from './schema/company.schema';
+import { SendMailService } from './services/send-mail.service';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import CompanySchema from './schema/company.schema';
     JwtService,
     CompanysService,
     JobsService,
+    SendMailService
   ],
 })
 export class AppModule implements NestModule {
