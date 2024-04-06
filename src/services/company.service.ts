@@ -21,6 +21,7 @@ export class CompanysService {
     const checkCompany = await this.companyModel
       .findOne({
         admin_id: User?._id,
+        code: body.code
       })
       .lean();
     if (checkCompany) {
@@ -46,8 +47,8 @@ export class CompanysService {
         _id: id,
       })
       .lean();
-    if (checkCompany) {
-      throw new Error('Tai khoan da dang ki cong ty roi');
+    if (!checkCompany) {
+      throw new Error('Cong ty khong ton tai');
     }
     return checkCompany;
   }
