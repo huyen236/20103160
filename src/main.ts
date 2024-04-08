@@ -27,7 +27,7 @@ async function bootstrap() {
     SwaggerModule.setup('swagger-docs', app, topCVocument);
   }
   // app.useGlobalInterceptors(new DefaultInterceptor() as any);
-  await app.listen(APP_CONFIG.port || 8085);
+  await app.listen(APP_CONFIG.port || 4050);
   // const app = await NestFactory.create(AppModule);
   // await app.listen(8085);
 }
