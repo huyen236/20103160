@@ -1,7 +1,7 @@
 const env = 'DEV';
 export const DevConfig = {
   env,
-  port: 3000,
+  port: 8085,
   fv_token_secret_key: 'internal_secret_key',
   fv_token_expires_in: 360000,
   mongoDb: {
