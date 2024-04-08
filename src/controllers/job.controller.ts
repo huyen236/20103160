@@ -19,12 +19,23 @@ export class JobController {
     private readonly responseUtil: ResponseUtil,
     private readonly jobsService: JobsService,
   ) {}
-
-  // truyen token . chua lam phan quyen
   @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async infoJob(@Param('id') id: string, @Res() res: any, @User() user: any) {
-    // const result = await this.JobsService.getUser(id);
-    // return this.responseUtil.success({ res, data: result });
+    const result = await this.jobsService.getDetailJob(id);
+    return this.responseUtil.success({ res, data: result });
+  }
+
+  @Post('/register')
+  async register(@Body() body: any, @Res() res: any, @User() user: any) {
+    const result = await this.jobsService.createJob(body, user);
+    return this.responseUtil.success({ res, data: result });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('')
+  async listJob(@Body() body: any, @Res() res: any, @User() user: any) {
+    const result = await this.jobsService.getListJobs(body, user);
+    return this.responseUtil.success({ res, data: result });
   }
 }

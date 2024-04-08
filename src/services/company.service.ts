@@ -21,7 +21,7 @@ export class CompanysService {
     const checkCompany = await this.companyModel
       .findOne({
         admin_id: User?._id,
-        code: body.code
+        code: body.code,
       })
       .lean();
     if (checkCompany) {
@@ -54,10 +54,10 @@ export class CompanysService {
   }
 
   // update thong tin cua cong ty
-  async updateCompany(body: any, User: any) {
+  async updateCompany(body: any, id: string) {
     const checkCompany = await this.companyModel
       .findOne({
-        admin_id: User?._id,
+        admin_id: id,
       })
       .lean();
     if (!checkCompany) {

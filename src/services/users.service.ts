@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { IUserDocument } from 'src/interfaces';
+import { Model, Types } from 'mongoose';
+import { IUserDocument, IUserSessionDocument } from 'src/interfaces';
 import { SendMailService } from './send-mail.service';
+import { LoginDto } from 'src/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel('users') private readonly userModel: Model<IUserDocument>,
+    @InjectModel('user-session')
+    private readonly userSessionModel: Model<IUserSessionDocument>,
     private readonly jwtService: JwtService,
     private readonly sendMailService: SendMailService,
   ) {}
@@ -22,7 +25,7 @@ export class UsersService {
   }
 
   // login vo app va tao token. decorde token se thay duoc nhung thong so can thiet
-  async login(body: any) {
+  async login(body: LoginDto) {
     const { email, password } = body;
     const checkLogin = await this.userModel
       .findOne({
@@ -33,6 +36,13 @@ export class UsersService {
     if (!checkLogin) {
       throw new Error('sai email hoac password');
     }
+    const userSession = await this.userSessionModel.findOne({
+      user_id: checkLogin._id,
+      is_active: true,
+    });
+    if (userSession) {
+      throw new Error('đã được login');
+    }
     const payload = {
       email,
       password,
@@ -40,11 +50,31 @@ export class UsersService {
       id: checkLogin._id,
       is_admin: checkLogin.is_admin,
     };
+    const login_time = Date.now();
+    await this.userSessionModel.create({
+      login_time,
+      expire_time: 3600,
+      user_id: checkLogin._id,
+      is_active: true,
+    });
     return {
       access_token: this.jwtService.sign(payload, {
         secret: 'your_secret_key',
       }),
     };
+  }
+
+  async logout(user: any) {
+    const login_out = Date.now();
+    return await this.userSessionModel.updateOne(
+      {
+        user_id: user._id,
+      },
+      {
+        login_out,
+        is_active: false,
+      },
+    );
   }
 
   // get thong tin chi tiet cua ng login
@@ -77,7 +107,7 @@ export class UsersService {
   }
 
   //update thong tin nguoi login va update chi tiet cua user hoac admin (co the dung update cho cv luon)
-  async updateInfoUser(body: any) {
+  async updateInfoUser(body: any, id: string) {
     const {
       gender,
       skill,
@@ -91,7 +121,7 @@ export class UsersService {
     } = body;
     const checkUser = await this.userModel
       .findOne({
-        _id: body._id,
+        _id: id,
       })
       .lean();
     if (!checkUser) {
@@ -110,7 +140,7 @@ export class UsersService {
     };
     return this.userModel.updateOne(
       {
-        _id: body._id,
+        _id: id,
       },
       dataUpdate,
     );

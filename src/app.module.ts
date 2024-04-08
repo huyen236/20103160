@@ -23,6 +23,7 @@ import JobSchema from './schema/jobs.schema';
 import CompanySchema from './schema/company.schema';
 import { SendMailService } from './services/send-mail.service';
 import JobMappingSchema from './schema/job-mapping.schema';
+import UserSessionSchema from './schema/user-session.schema';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import JobMappingSchema from './schema/job-mapping.schema';
       { name: 'jobs', schema: JobSchema },
       { name: 'company', schema: CompanySchema },
       { name: 'job-mapping', schema: JobMappingSchema },
+      { name: 'user-session', schema: UserSessionSchema },
     ]),
   ],
   controllers: [
