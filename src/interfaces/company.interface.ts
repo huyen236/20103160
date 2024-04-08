@@ -11,4 +11,8 @@ export interface ICompanyDocument {
   deletedBy?: string;
   deletedAt?: string;
   code?: string;
+  created_by?: string;
+  created_at?: number;
+  updated_by?: string;
+  updated_at?: number;
 }

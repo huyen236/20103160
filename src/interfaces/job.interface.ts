@@ -6,10 +6,10 @@ export interface IJobDocument {
   address?: string;
   request_cv?: string;
   company_code?: string;
-  createdBy?: string;
-  updatedBy?: string;
-  deletedBy?: string;
-  deletedAt?: string;
   time_start?: Date;
   time_end?: Date;
+  created_by?: string;
+  created_at?: number;
+  updated_by?: string;
+  updated_at?: number;
 }

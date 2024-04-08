@@ -5,4 +5,8 @@ export interface IUserDocument {
   phone?: string;
   address?: string;
   is_admin?: boolean;
+  created_by?: string;
+  created_at?: number;
+  updated_by?: string;
+  updated_at?: number;
 }

@@ -22,6 +22,7 @@ import UserSchema from './schema/users.schema';
 import JobSchema from './schema/jobs.schema';
 import CompanySchema from './schema/company.schema';
 import { SendMailService } from './services/send-mail.service';
+import JobMappingSchema from './schema/job-mapping.schema';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { SendMailService } from './services/send-mail.service';
       { name: 'users', schema: UserSchema },
       { name: 'jobs', schema: JobSchema },
       { name: 'company', schema: CompanySchema },
+      { name: 'job-mapping', schema: JobMappingSchema },
     ]),
   ],
   controllers: [
@@ -49,7 +51,7 @@ import { SendMailService } from './services/send-mail.service';
     JwtService,
     CompanysService,
     JobsService,
-    SendMailService
+    SendMailService,
   ],
 })
 export class AppModule implements NestModule {
