@@ -5,6 +5,7 @@ const CompanySchema = new mongoose.Schema(
     name: { type: String, default: null, required: true },
     email: { type: String, default: null, index: true, unique: true },
     phone: { type: String, default: null, unique: true },
+    code: { type: String },
     address_company: { type: String },
     tax_code: { type: String },
     link: { type: String },

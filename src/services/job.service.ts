@@ -12,7 +12,7 @@ export class JobsService {
     @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
     @InjectModel('company')
     private readonly companyModel: Model<ICompanyDocument>,
-  ) {}
+  ) { }
 
   // tao job cho cong ty
   async createJob(body: any, User: any) {
@@ -20,6 +20,7 @@ export class JobsService {
     const {
       job_name,
       description_job,
+      code,
       wage,
       benefits,
       address,
@@ -32,7 +33,7 @@ export class JobsService {
       time_start,
       time_end,
     } = body;
-    if (!User.is_admin) {
+    if (!User.is_admin) { // kiem tra xem phai la admin k 
       throw new Error('Bạn không có quyền tạo job');
     }
     const checkCompany = await this.companyModel
@@ -46,9 +47,16 @@ export class JobsService {
         'Công ty không đúng hoặc không được liên kết với User admin',
       );
     }
+    const job = await this.jobModel.findOne({
+      code
+    })
+    if (job) {
+      throw new Error("job da ton tai code")
+    }
     const dataCreate = {
       job_name,
       description_job,
+      code,
       wage,
       benefits,
       address,

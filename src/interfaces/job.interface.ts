@@ -1,6 +1,7 @@
 export interface IJobDocument {
   job_name?: string;
   description_job?: string;
+  code: string;
   wage?: string;
   benefits?: string;
   address?: string;

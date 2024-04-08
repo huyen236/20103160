@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  nestjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nestjs-app
+    container_name: nestjs-container
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/topcv
+    ports:
+      - '4050:4050'
+    depends_on:
+      - mongodb
+    networks:
+      - nest-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-container
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_DATABASE=topcv
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - nest-network
+
+networks:
+  nest-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
