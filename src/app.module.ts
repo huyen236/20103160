@@ -114,6 +114,6 @@ export class AppModule implements NestModule {
         method: RequestMethod.PUT,
       },
     );
-    consumer.apply(HealthMiddleware).forRoutes('*');
+    // consumer.apply(HealthMiddleware).forRoutes('*');
   }
 }
