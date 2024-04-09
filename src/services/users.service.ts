@@ -37,13 +37,13 @@ export class UsersService {
     if (!checkLogin) {
       throw new Error('sai email hoac password');
     }
-    const userSession = await this.userSessionModel.findOne({
-      user_id: checkLogin._id,
-      is_active: true,
-    });
-    if (userSession) {
-      throw new Error('đã được login');
-    }
+    // const userSession = await this.userSessionModel.findOne({
+    //   user_id: checkLogin._id,
+    //   is_active: true,
+    // });
+    // if (userSession) {
+    //   throw new Error('đã được login');
+    // }
     const payload = {
       email,
       // password,
@@ -62,6 +62,7 @@ export class UsersService {
     return {
       access_token: this.jwtService.sign(payload, {
         secret: 'your_secret_key',
+        expiresIn: 3600,
       }),
     };
   }

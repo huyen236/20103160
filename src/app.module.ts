@@ -24,7 +24,7 @@ import {
 } from './controllers';
 import { ResponseUtil } from './utils/response.util';
 import { MODEL_NAMES } from './constants';
-import { JwtService } from '@nestjs/jwt';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import UserSchema from './schema/users.schema';
 import JobSchema from './schema/jobs.schema';
 import CompanySchema from './schema/company.schema';
@@ -37,6 +37,11 @@ import { HashUtil } from './utils/hash.util';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    JwtModule.register({
+      global: true,
+      secret: 'your_secret_key',
+      signOptions: { expiresIn: '3600s' },
+    }),
     MongooseModule.forRoot(APP_CONFIG.mongoDb.db_topcv_url, {
       retryAttempts: Number.MAX_VALUE,
       retryDelay: 1000,
