@@ -27,6 +27,7 @@ import { SendMailService } from './services/send-mail.service';
 import JobMappingSchema from './schema/job-mapping.schema';
 import UserSessionSchema from './schema/user-session.schema';
 import { ChecktokenMiddleware } from './middlewares/checktoken.middleware';
+import { HashUtil } from './utils/hash.util';
 
 @Module({
   imports: [
@@ -58,7 +59,8 @@ import { ChecktokenMiddleware } from './middlewares/checktoken.middleware';
     CompanysService,
     JobsService,
     SendMailService,
-    JobMappingService
+    JobMappingService,
+    HashUtil
   ],
 })
 export class AppModule implements NestModule {
