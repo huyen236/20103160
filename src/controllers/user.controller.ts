@@ -29,7 +29,7 @@ export class UserController {
       const result = await this.usersService.getUser(id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -39,7 +39,7 @@ export class UserController {
       const result = await this.usersService.login(body);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -49,7 +49,7 @@ export class UserController {
       const result = await this.usersService.logout(user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -59,7 +59,7 @@ export class UserController {
       const result = await this.usersService.register(body);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -73,7 +73,7 @@ export class UserController {
       const result = await this.usersService.updateInfoUser(body, id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -83,7 +83,7 @@ export class UserController {
       const result = await this.usersService.ForgotPassword(email);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -93,7 +93,7 @@ export class UserController {
       const result = await this.usersService.changePasswordApp(body);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 }

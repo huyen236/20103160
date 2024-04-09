@@ -81,7 +81,11 @@ export class UsersService {
 
   // get thong tin chi tiet cua ng login
   async getUser(id: string) {
-    const user = await this.userModel.findById(id).lean();
+    const user = await this.userModel
+      .findOne({
+        _id: id,
+      })
+      .lean();
     if (!user) {
       throw new Error('user khong ton tai');
     }

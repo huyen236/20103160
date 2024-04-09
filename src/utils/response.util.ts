@@ -33,17 +33,18 @@ export class ResponseUtil {
     res.status(200).send(result);
     return result;
   }
-  failed(params: { data?: any; res: Response }): any {
-    let { data } = params;
+  failed(params: { data?: any; res: Response, message: string }): any {
+    let { data, message } = params;
 
-    if (!data || !data.error_code) {
-      data = {
-        ...data,
-      };
-    }
+    // if (!data || !data.error_code) {
+    //   data = {
+    //     ...data,
+    //   };
+    // }
     const result = {
       success: false,
       ...data,
+      message
     };
     params.res.status(422).send(result);
     return result;

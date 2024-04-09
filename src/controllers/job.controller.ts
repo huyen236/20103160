@@ -26,7 +26,7 @@ export class JobController {
       const result = await this.jobsService.getDetailJob(id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -36,7 +36,7 @@ export class JobController {
       const result = await this.jobsService.createJob(body, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 
@@ -47,7 +47,7 @@ export class JobController {
       const result = await this.jobsService.getListJobs(body, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return this.responseUtil.failed(error);
+      return res.status(422).send(error.message);
     }
   }
 }
