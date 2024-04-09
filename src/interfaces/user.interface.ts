@@ -16,4 +16,5 @@ export interface IUserDocument {
   created_at?: number;
   updated_by?: string;
   updated_at?: number;
+  active?: boolean;
 }

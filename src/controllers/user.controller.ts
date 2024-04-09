@@ -96,4 +96,24 @@ export class UserController {
       return res.status(422).send(error.message);
     }
   }
+
+  @Get('/change-pass-mail/:id')
+  async changePassEmail(@Param('id') id: string, @Res() res: any) {
+    try {
+      const result = await this.usersService.changeP(id);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return res.status(422).send(error.message);
+    }
+  }
+
+  @Get('/active-user/:email')
+  async active(@Param('email') email: string, @Res() res: any) {
+    try {
+      const result = await this.usersService.activeUser(email);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return res.status(422).send(error.message);
+    }
+  }
 }

@@ -162,10 +162,11 @@ export class UsersService {
       throw new Error('email không chính xác');
     }
     const { id } = checkMail;
+    const api = `http://221.132.33.183:4050/api/users/change-pass-mail/${id}`;
     await this.sendMailService.sendMail(
       email,
       email,
-      `You have requested a password reset. Click the following link to reset your password`, // link lấy từ api changeP
+      `You have requested a password reset. Click the following link to reset your password ${api}`, // link lấy từ api changeP
     );
   }
 
@@ -174,7 +175,7 @@ export class UsersService {
     return await this.userModel.updateOne(
       { _id: id },
       {
-        password: '123456', // password  mặc định
+        password: 'Abc12345', // password  mặc định
       },
     );
   }
@@ -185,6 +186,24 @@ export class UsersService {
       { _id: id },
       {
         password, // password  mặc định
+      },
+    );
+  }
+
+  async activeUser(email: string) {
+    const checkMail = await this.userModel.findOne({
+      email,
+    });
+    if (!checkMail) {
+      throw new Error('email không chính xác');
+    }
+    const { id } = checkMail;
+    return await this.userModel.updateOne(
+      {
+        _id: id,
+      },
+      {
+        active: true,
       },
     );
   }

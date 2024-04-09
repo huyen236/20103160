@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema(
     industry: { type: String },
     province: { type: String },
     is_admin: { type: Boolean, default: false },
+    active: { type: Boolean, default: false },
     deleted_by: { type: String, default: null, index: true },
     deleted_at: { type: Date, default: null },
     created_at: { type: Number, index: true },
