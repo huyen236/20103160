@@ -4,7 +4,7 @@ import { HashUtil } from '../utils/hash.util';
 // import { INTEGRATORS_TYPE } from '../constants/common.constant';
 
 @Injectable()
-export class ChecktokenMerchantMiddleware implements NestMiddleware {
+export class ChecktokenMiddleware implements NestMiddleware {
   constructor(@Inject(HashUtil) private hashUtil: HashUtil) {}
 
   use(req: Request, res: Response, next: any) {

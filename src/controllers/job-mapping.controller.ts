@@ -22,7 +22,7 @@ export class JobMappingController {
     private readonly jobMappingService: JobMappingService,
   ) {}
   @UseGuards(JwtAuthGuard)
-  @Get('/')
+  @Get('')
   async infoJob(@Body() body: any, @Res() res: any, @User() user: any) {
     try {
       const result = await this.jobMappingService.getListJobApply(body, user);

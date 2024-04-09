@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { APP_CONFIG } from 'config';
@@ -26,6 +26,7 @@ import CompanySchema from './schema/company.schema';
 import { SendMailService } from './services/send-mail.service';
 import JobMappingSchema from './schema/job-mapping.schema';
 import UserSessionSchema from './schema/user-session.schema';
+import { ChecktokenMiddleware } from './middlewares/checktoken.middleware';
 
 @Module({
   imports: [
@@ -62,6 +63,53 @@ import UserSessionSchema from './schema/user-session.schema';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(ChecktokenMiddleware)
+      .exclude(
+        { path: 'api/users/:id', method: RequestMethod.GET },
+        { path: 'api/users/logout', method: RequestMethod.POST },
+        {
+          path: 'api/users/update/:id',
+          method: RequestMethod.PUT,
+        },
+        {
+          path: 'api/users/change-password',
+          method: RequestMethod.PUT,
+        },
+        {
+          path: 'api/jobs/register',
+          method: RequestMethod.POST,
+        },
+        {
+          path: 'api/jobs',
+          method: RequestMethod.GET,
+        },
+        {
+          path: 'api/job-mapping',
+          method: RequestMethod.GET,
+        },
+        {
+          path: 'api/job-mapping/applyCV',
+          method: RequestMethod.POST,
+        },
+        {
+          path: 'api/job-mapping/approvalCV',
+          method: RequestMethod.GET,
+        },
+        {
+          path: 'api/companys/:id',
+          method: RequestMethod.GET,
+        },
+        {
+          path: 'api/companys/register',
+          method: RequestMethod.POST,
+        },
+        {
+          path: 'api/companys/update/:id',
+          method: RequestMethod.PUT,
+        },
+      )
+      .forRoutes('*');
     consumer.apply(HealthMiddleware).forRoutes('*');
   }
 }
