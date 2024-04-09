@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { APP_CONFIG } from 'config';
@@ -49,7 +54,7 @@ import { HashUtil } from './utils/hash.util';
     UserController,
     JobController,
     CompanyController,
-    JobMappingController
+    JobMappingController,
   ],
   providers: [
     HealthService,
@@ -60,58 +65,55 @@ import { HashUtil } from './utils/hash.util';
     JobsService,
     SendMailService,
     JobMappingService,
-    HashUtil
+    HashUtil,
   ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(ChecktokenMiddleware)
-      .exclude(
-        { path: 'api/users/:id', method: RequestMethod.GET },
-        { path: 'api/users/logout', method: RequestMethod.POST },
-        {
-          path: 'api/users/update/:id',
-          method: RequestMethod.PUT,
-        },
-        {
-          path: 'api/users/change-password',
-          method: RequestMethod.PUT,
-        },
-        {
-          path: 'api/jobs/register',
-          method: RequestMethod.POST,
-        },
-        {
-          path: 'api/jobs',
-          method: RequestMethod.GET,
-        },
-        {
-          path: 'api/job-mapping',
-          method: RequestMethod.GET,
-        },
-        {
-          path: 'api/job-mapping/applyCV',
-          method: RequestMethod.POST,
-        },
-        {
-          path: 'api/job-mapping/approvalCV',
-          method: RequestMethod.GET,
-        },
-        {
-          path: 'api/companys/:id',
-          method: RequestMethod.GET,
-        },
-        {
-          path: 'api/companys/register',
-          method: RequestMethod.POST,
-        },
-        {
-          path: 'api/companys/update/:id',
-          method: RequestMethod.PUT,
-        },
-      )
-      .forRoutes('*');
+    consumer.apply(ChecktokenMiddleware).forRoutes(
+      { path: 'users/:id', method: RequestMethod.GET },
+      { path: 'users/logout', method: RequestMethod.POST },
+      {
+        path: 'users/update/:id',
+        method: RequestMethod.PUT,
+      },
+      {
+        path: 'users/change-password',
+        method: RequestMethod.PUT,
+      },
+      {
+        path: 'jobs/register',
+        method: RequestMethod.POST,
+      },
+      {
+        path: 'jobs',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'job-mapping',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'job-mapping/applyCV',
+        method: RequestMethod.POST,
+      },
+      {
+        path: 'job-mapping/approvalCV',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'companys/:id',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'companys/register',
+        method: RequestMethod.POST,
+      },
+      {
+        path: 'companys/update/:id',
+        method: RequestMethod.PUT,
+      },
+    );
     consumer.apply(HealthMiddleware).forRoutes('*');
   }
 }
