@@ -12,7 +12,7 @@ import { HealthService, UsersService } from '../services';
 import { ResponseUtil } from '../utils/response.util';
 import { User } from 'src/decorators';
 import { LoginDto } from 'src/dtos/login.dto';
-import { RegisterDto } from 'src/dtos';
+import { RegisterDto, UpdateUserDto } from 'src/dtos';
 
 @Controller('users')
 export class UserController {
@@ -48,7 +48,11 @@ export class UserController {
   }
 
   @Put('/update/:id')
-  async update(@Body() body: any, @Param('id') id: string, @Res() res: any) {
+  async update(
+    @Body() body: UpdateUserDto,
+    @Param('id') id: string,
+    @Res() res: any,
+  ) {
     const result = await this.usersService.updateInfoUser(body, id);
     return this.responseUtil.success({ res, data: result });
   }

@@ -1,14 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsEmail,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-} from 'class-validator';
-import { Transform } from 'class-transformer';
-import { IsValidPassword } from 'src/validators';
-
+import { IsOptional, IsString } from 'class-validator';
 export class UpdateUserDto {
   @ApiProperty({
     description: 'phone',
@@ -30,4 +21,53 @@ export class UpdateUserDto {
   @IsString()
   @IsOptional()
   address: string;
+
+  @ApiProperty({
+    description: 'gender',
+  })
+  @IsString()
+  @IsOptional()
+  gender: string;
+
+  @ApiProperty({
+    description: 'skill',
+  })
+  @IsString()
+  @IsOptional()
+  skill: string;
+
+  @ApiProperty({
+    description: 'experience',
+  })
+  @IsString()
+  @IsOptional()
+  experience: string;
+
+  @ApiProperty({
+    description: 'description_job',
+  })
+  @IsString()
+  @IsOptional()
+  description_job: string;
+
+  @ApiProperty({
+    description: 'specialized',
+  })
+  @IsString()
+  @IsOptional()
+  specialized: string;
+
+  @ApiProperty({
+    description: 'specialized',
+  })
+  @IsString()
+  @IsOptional()
+  industry: string;
+
+  @ApiProperty({
+    description: 'specialized',
+  })
+  @IsString()
+  @IsOptional()
+  province: string;
 }

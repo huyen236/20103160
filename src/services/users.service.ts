@@ -5,7 +5,7 @@ import { Model, Types } from 'mongoose';
 import { IUserDocument, IUserSessionDocument } from 'src/interfaces';
 import { SendMailService } from './send-mail.service';
 import { LoginDto } from 'src/dtos/login.dto';
-import { RegisterDto } from 'src/dtos';
+import { RegisterDto, UpdateUserDto } from 'src/dtos';
 
 @Injectable()
 export class UsersService {
@@ -108,7 +108,7 @@ export class UsersService {
   }
 
   //update thong tin nguoi login va update chi tiet cua user hoac admin (co the dung update cho cv luon)
-  async updateInfoUser(body: any, id: string) {
+  async updateInfoUser(body: UpdateUserDto, id: string) {
     const {
       gender,
       skill,
