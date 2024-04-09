@@ -1,7 +1,6 @@
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { HashUtil } from '../utils/hash.util';
-import { APP_CONFIG } from '../../config';
 // import { INTEGRATORS_TYPE } from '../constants/common.constant';
 
 @Injectable()
@@ -18,11 +17,8 @@ export class ChecktokenMerchantMiddleware implements NestMiddleware {
     }
     token = token.slice(7, token.length).trimLeft();
     this.hashUtil
-      .verifyToken(token.toString(), APP_CONFIG.fv_token_secret_key)
+      .verifyToken(token.toString(), 'your_secret_key')
       .then((data) => {
-        // if (data.type !== INTEGRATORS_TYPE.CONSUMER) {
-        //   throw 'Tài khoản xác thực không hợp lệ';
-        // }
         req['user'] = data;
         next();
       })

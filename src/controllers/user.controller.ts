@@ -25,26 +25,42 @@ export class UserController {
   // truyen token . chua lam phan quyen
   @Get('/:id')
   async infoUser(@Param('id') id: string, @Res() res: any) {
-    const result = await this.usersService.getUser(id);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.usersService.getUser(id);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Post('/login')
   async login(@Body() body: LoginDto, @Res() res: any) {
-    const result = await this.usersService.login(body);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.usersService.login(body);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Post('/logout')
   async logout(@Res() res: any, @User() user: any) {
-    const result = await this.usersService.logout(user);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.usersService.logout(user);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Post('/register')
   async register(@Body() body: RegisterDto, @Res() res: any) {
-    const result = await this.usersService.register(body);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.usersService.register(body);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Put('/update/:id')
@@ -53,19 +69,31 @@ export class UserController {
     @Param('id') id: string,
     @Res() res: any,
   ) {
-    const result = await this.usersService.updateInfoUser(body, id);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.usersService.updateInfoUser(body, id);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Get('/forgot-password/:email')
   async forgotPassword(@Param('email') email: string, @Res() res: any) {
-    const result = await this.usersService.ForgotPassword(email);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.usersService.ForgotPassword(email);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Put('/change-password')
   async changePassword(@Body() body: any, @Res() res: any) {
-    const result = await this.usersService.changePasswordApp(body);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.usersService.changePasswordApp(body);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 }

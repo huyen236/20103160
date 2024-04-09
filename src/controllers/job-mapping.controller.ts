@@ -24,19 +24,31 @@ export class JobMappingController {
   @UseGuards(JwtAuthGuard)
   @Get('/')
   async infoJob(@Body() body: any, @Res() res: any, @User() user: any) {
-    const result = await this.jobMappingService.getListJobApply(body, user);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.jobMappingService.getListJobApply(body, user);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Post('/applyCV')
   async apply(@Body() body: ApplyCVDto, @Res() res: any, @User() user: any) {
-    const result = await this.jobMappingService.applyCV(body, user);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.jobMappingService.applyCV(body, user);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Post('/approvalCV')
   async approval(@Body() body: any, @Res() res: any, @User() user: any) {
-    const result = await this.jobMappingService.approvalCV(body, user);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.jobMappingService.approvalCV(body, user);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 }

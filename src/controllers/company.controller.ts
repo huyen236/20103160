@@ -25,19 +25,34 @@ export class CompanyController {
   @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async infoJob(@Param('id') id: string, @Res() res: any, @User() user: any) {
-    const result = await this.companysService.getInfoCompany(id);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.companysService.getInfoCompany(id);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Post('/register')
   async register(@Body() body: any, @Res() res: any, @User() user: any) {
-    const result = await this.companysService.createCompanyOnlyOne(body, user);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.companysService.createCompanyOnlyOne(
+        body,
+        user,
+      );
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Put('/update/:id')
   async update(@Body() body: any, @Param('id') id: string, @Res() res: any) {
-    const result = await this.companysService.updateCompany(body, id);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.companysService.updateCompany(body, id);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 }

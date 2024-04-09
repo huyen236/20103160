@@ -47,6 +47,7 @@ export class UsersService {
     const payload = {
       email,
       // password,
+      _id: checkLogin._id,
       phone: checkLogin.phone,
       id: checkLogin._id,
       is_admin: checkLogin.is_admin,

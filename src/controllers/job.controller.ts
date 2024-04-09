@@ -22,20 +22,32 @@ export class JobController {
   @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async infoJob(@Param('id') id: string, @Res() res: any, @User() user: any) {
-    const result = await this.jobsService.getDetailJob(id);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.jobsService.getDetailJob(id);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @Post('/register')
   async register(@Body() body: any, @Res() res: any, @User() user: any) {
-    const result = await this.jobsService.createJob(body, user);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.jobsService.createJob(body, user);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('')
   async listJob(@Body() body: any, @Res() res: any, @User() user: any) {
-    const result = await this.jobsService.getListJobs(body, user);
-    return this.responseUtil.success({ res, data: result });
+    try {
+      const result = await this.jobsService.getListJobs(body, user);
+      return this.responseUtil.success({ res, data: result });
+    } catch (error) {
+      return this.responseUtil.failed(error);
+    }
   }
 }
