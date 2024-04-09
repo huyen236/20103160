@@ -5,6 +5,7 @@ import { APP_CONFIG } from 'config';
 import {
   CompanysService,
   HealthService,
+  JobMappingService,
   JobsService,
   UsersService,
 } from './services';
@@ -12,6 +13,7 @@ import { HealthMiddleware } from './middlewares/health.middleware';
 import {
   CompanyController,
   JobController,
+  JobMappingController,
   PingController,
   UserController,
 } from './controllers';
@@ -45,6 +47,7 @@ import UserSessionSchema from './schema/user-session.schema';
     UserController,
     JobController,
     CompanyController,
+    JobMappingController
   ],
   providers: [
     HealthService,
@@ -54,6 +57,7 @@ import UserSessionSchema from './schema/user-session.schema';
     CompanysService,
     JobsService,
     SendMailService,
+    JobMappingService
   ],
 })
 export class AppModule implements NestModule {

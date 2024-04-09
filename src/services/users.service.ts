@@ -5,6 +5,7 @@ import { Model, Types } from 'mongoose';
 import { IUserDocument, IUserSessionDocument } from 'src/interfaces';
 import { SendMailService } from './send-mail.service';
 import { LoginDto } from 'src/dtos/login.dto';
+import { RegisterDto } from 'src/dtos';
 
 @Injectable()
 export class UsersService {
@@ -45,7 +46,7 @@ export class UsersService {
     }
     const payload = {
       email,
-      password,
+      // password,
       phone: checkLogin.phone,
       id: checkLogin._id,
       is_admin: checkLogin.is_admin,
@@ -87,14 +88,14 @@ export class UsersService {
   }
 
   // dang ki tai khoan
-  async register(body: any) {
+  async register(body: RegisterDto) {
     const { email, phone, name, password, address } = body;
     const checkEmail = await this.userModel
       .findOne({
         email,
       })
       .lean();
-    if (!checkEmail) {
+    if (checkEmail) {
       throw new Error('email da duoc dang ki');
     }
     return await this.userModel.create({

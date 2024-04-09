@@ -13,6 +13,7 @@ import { ResponseUtil } from '../utils/response.util';
 import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { JobMappingService } from 'src/services/job-mapping.service';
+import { ApplyCVDto } from 'src/dtos';
 
 @Controller('job-mapping')
 export class JobMappingController {
@@ -28,7 +29,7 @@ export class JobMappingController {
   }
 
   @Post('/applyCV')
-  async apply(@Body() body: any, @Res() res: any, @User() user: any) {
+  async apply(@Body() body: ApplyCVDto, @Res() res: any, @User() user: any) {
     const result = await this.jobMappingService.applyCV(body, user);
     return this.responseUtil.success({ res, data: result });
   }
