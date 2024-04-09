@@ -28,7 +28,10 @@ export class JobMappingController {
       const result = await this.jobMappingService.getListJobApply(body, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message:error.message
+      });
     }
   }
 
@@ -38,7 +41,10 @@ export class JobMappingController {
       const result = await this.jobMappingService.applyCV(body, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message:error.message
+      });
     }
   }
 
@@ -48,7 +54,10 @@ export class JobMappingController {
       const result = await this.jobMappingService.approvalCV(body, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message:error.message
+      });
     }
   }
 }

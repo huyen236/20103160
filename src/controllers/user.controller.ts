@@ -29,7 +29,10 @@ export class UserController {
       const result = await this.usersService.getUser(id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -39,7 +42,10 @@ export class UserController {
       const result = await this.usersService.login(body);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -49,7 +55,10 @@ export class UserController {
       const result = await this.usersService.logout(user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -59,7 +68,10 @@ export class UserController {
       const result = await this.usersService.register(body);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -73,7 +85,10 @@ export class UserController {
       const result = await this.usersService.updateInfoUser(body, id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -83,7 +98,10 @@ export class UserController {
       const result = await this.usersService.ForgotPassword(email);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -93,7 +111,10 @@ export class UserController {
       const result = await this.usersService.changePasswordApp(body);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -103,7 +124,10 @@ export class UserController {
       const result = await this.usersService.changeP(id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 
@@ -113,7 +137,10 @@ export class UserController {
       const result = await this.usersService.activeUser(email);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message: error.message,
+      });
     }
   }
 }

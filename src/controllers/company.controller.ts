@@ -29,7 +29,10 @@ export class CompanyController {
       const result = await this.companysService.getInfoCompany(id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message:error.message
+      });
     }
   }
 
@@ -42,7 +45,10 @@ export class CompanyController {
       );
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message:error.message
+      });
     }
   }
 
@@ -52,7 +58,10 @@ export class CompanyController {
       const result = await this.companysService.updateCompany(body, id);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
-      return res.status(422).send(error.message);
+      return res.status(422).send({
+        status: 'failed',
+        message:error.message
+      });
     }
   }
 }
