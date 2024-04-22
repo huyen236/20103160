@@ -6,10 +6,6 @@ export interface ICompanyDocument {
   tax_code?: string;
   link?: string;
   admin_id: string;
-  createdBy?: string;
-  updatedBy?: string;
-  deletedBy?: string;
-  deletedAt?: string;
   code?: string;
   created_by?: string;
   created_at?: number;

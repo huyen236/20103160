@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
+import { STATUS } from 'src/constants';
 import { IUserDocument } from 'src/interfaces';
 import { ICompanyDocument } from 'src/interfaces/company.interface';
 import { IJobDocument } from 'src/interfaces/job.interface';
@@ -13,23 +14,21 @@ export class JobMappingService {
     @InjectModel('users') private readonly userModel: Model<IJobDocument>,
     @InjectModel('company')
     private readonly companyModel: Model<ICompanyDocument>,
-  ) {}
+  ) { }
 
   // tao job cho cong ty
 
   async applyCV(body: any, user: any) {
-    const { job_code, company_code } = body
+    const { job_id, company_code } = body
     const checkApplyJob = await this.jobMappingModel.findOne({
       user_id: user?._id,
-      job_code,
-      company_code
+      job_id
     })
     if (checkApplyJob) {
       throw new Error("user da apply vo job cua cong ty roi")
     }
     const data = {
-      job_code,
-      company_code,
+      job_id,
       user_id: user?._id,
       status: 'submit'
     }
@@ -44,11 +43,12 @@ export class JobMappingService {
     if (!company) {
       throw new Error("khong phai admin cua cong ty")
     }
-    const { job_code, company_code, status } = body
+    //status = success
+    const { job_id, company_code, status, user_id } = body
     const job = await this.jobModel.findOne({
-      code: job_code,
+      _id: job_id,
       company_code: company_code,
-      status: 'active',
+      status: STATUS.ACTIVE,
       time_end: {
         $lte: new Date()
       }
@@ -57,15 +57,15 @@ export class JobMappingService {
       throw new Error("Job khong ton tai hoac da het han hoac bi dong lai ")
     }
     const jobCompany = await this.jobMappingModel.findOne({
-      job_code,
-      status: 'submit',
-      company_code
+      job_id,
+      status: STATUS.SUBMIT,
+      user_id
     })
     if (!jobCompany) {
       throw new Error("dang o trang thai khong cap nhat duoc hoac khong ton tai")
     }
     return await this.jobMappingModel.updateOne({ _id: jobCompany._id }, {
-      status
+      status: STATUS.SUCCESS
     })
   }
 

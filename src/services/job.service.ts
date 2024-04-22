@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { FilterQuery, Model } from 'mongoose';
-import { IUserDocument } from 'src/interfaces';
+import { FilterQuery, Model, Types } from 'mongoose';
+import { ICareerDocument, IUserDocument } from 'src/interfaces';
 import { ICompanyDocument } from 'src/interfaces/company.interface';
 import { IJobDocument } from 'src/interfaces/job.interface';
 
@@ -12,6 +12,7 @@ export class JobsService {
     @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
     @InjectModel('company')
     private readonly companyModel: Model<ICompanyDocument>,
+    @InjectModel('careers') private readonly careerModel: Model<ICareerDocument>,
   ) { }
 
   // tao job cho cong ty
@@ -32,6 +33,7 @@ export class JobsService {
       deletedAt,
       time_start,
       time_end,
+      career_id
     } = body;
     if (!User.is_admin) { // kiem tra xem phai la admin k 
       throw new Error('Bạn không có quyền tạo job');
@@ -52,6 +54,14 @@ export class JobsService {
     })
     if (job) {
       throw new Error("job da ton tai code")
+    }
+    if (career_id) {
+      const career = await this.careerModel.findOne({
+        _id: career_id
+      })
+      if (!career) {
+        throw new Error("career khong ton tai")
+      }
     }
     const dataCreate = {
       job_name,

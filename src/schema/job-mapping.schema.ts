@@ -16,6 +16,11 @@ const JobMappingSchema = new mongoose.Schema(
       updatedAt: 'updated_at',
       currentTime: () => Date.now(),
     },
+    collection: 'job-mapping',
+    autoIndex: true,
+    autoCreate: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 export default JobMappingSchema;

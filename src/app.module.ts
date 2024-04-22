@@ -12,6 +12,7 @@ import {
   HealthService,
   JobMappingService,
   JobsService,
+  StatisticService,
   UsersService,
 } from './services';
 import { HealthMiddleware } from './middlewares/health.middleware';
@@ -20,6 +21,7 @@ import {
   JobController,
   JobMappingController,
   PingController,
+  StatisticController,
   UserController,
 } from './controllers';
 import { ResponseUtil } from './utils/response.util';
@@ -33,6 +35,7 @@ import JobMappingSchema from './schema/job-mapping.schema';
 import UserSessionSchema from './schema/user-session.schema';
 import { ChecktokenMiddleware } from './middlewares/checktoken.middleware';
 import { HashUtil } from './utils/hash.util';
+import CareerSchema from './schema/careers.schema';
 
 @Module({
   imports: [
@@ -52,6 +55,7 @@ import { HashUtil } from './utils/hash.util';
       { name: 'company', schema: CompanySchema },
       { name: 'job-mapping', schema: JobMappingSchema },
       { name: 'user-session', schema: UserSessionSchema },
+      { name: 'careers', schema: CareerSchema },
     ]),
   ],
   controllers: [
@@ -60,6 +64,7 @@ import { HashUtil } from './utils/hash.util';
     JobController,
     CompanyController,
     JobMappingController,
+    StatisticController
   ],
   providers: [
     HealthService,
@@ -71,6 +76,7 @@ import { HashUtil } from './utils/hash.util';
     SendMailService,
     JobMappingService,
     HashUtil,
+    StatisticService
   ],
 })
 export class AppModule implements NestModule {
@@ -118,6 +124,22 @@ export class AppModule implements NestModule {
         path: 'companys/update/:id',
         method: RequestMethod.PUT,
       },
+      {
+        path: 'statistic/admin/apply-job',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'statistic/admin/job',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'statistic/user/approval-job',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'statistic/admin/approval-job',
+        method: RequestMethod.GET,
+      }
     );
     // consumer.apply(HealthMiddleware).forRoutes('*');
   }
