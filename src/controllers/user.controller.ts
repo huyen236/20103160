@@ -13,6 +13,7 @@ import { ResponseUtil } from '../utils/response.util';
 import { User } from 'src/decorators';
 import { LoginDto } from 'src/dtos/login.dto';
 import { RegisterDto, UpdateUserDto } from 'src/dtos';
+import { ChangePassDto } from 'src/dtos/user';
 
 @Controller('users')
 export class UserController {
@@ -105,11 +106,16 @@ export class UserController {
     }
   }
 
-  @Put('/change-password')
-  async changePassword(@Body() body: any, @Res() res: any) {
+  @Put('/change-password/:id')
+  async changePassword(
+    @Param('id') id: string,
+    @Body() body: ChangePassDto,
+    @Res() res: any,
+  ) {
     try {
-      const result = await this.usersService.changePasswordApp(body);
-      return this.responseUtil.success({ res, data: result });
+      const result = await this.usersService.changePasswordApp(body, id);
+      // @ts-ignore
+      return this.responseUtil.success({ res, data: result._doc });
     } catch (error) {
       return res.status(422).send({
         status: 'failed',

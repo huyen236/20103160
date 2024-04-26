@@ -13,6 +13,7 @@ import { ResponseUtil } from '../utils/response.util';
 import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { CompanysService } from 'src/services';
+import { RegisterCompanyDto, UpdateCompanyDto } from 'src/dtos/company';
 
 @Controller('companys')
 export class CompanyController {
@@ -37,7 +38,7 @@ export class CompanyController {
   }
 
   @Post('/register')
-  async register(@Body() body: any, @Res() res: any, @User() user: any) {
+  async register(@Body() body: RegisterCompanyDto, @Res() res: any, @User() user: any) {
     try {
       const result = await this.companysService.createCompanyOnlyOne(
         body,
@@ -53,7 +54,7 @@ export class CompanyController {
   }
 
   @Put('/update/:id')
-  async update(@Body() body: any, @Param('id') id: string, @Res() res: any) {
+  async update(@Body() body: UpdateCompanyDto, @Param('id') id: string, @Res() res: any) {
     try {
       const result = await this.companysService.updateCompany(body, id);
       return this.responseUtil.success({ res, data: result });

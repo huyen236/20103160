@@ -22,7 +22,7 @@ export class approvalCVDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_code',
+    description: 'job_id',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -32,12 +32,12 @@ export class approvalCVDto extends ValidateDto {
     return value;
   })
   @IsString()
-  job_code: string;
+  job_id: string;
 
   @ApiProperty({
     type: String,
     required: false,
-    description: 'company_code',
+    description: 'company_id',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -47,5 +47,5 @@ export class approvalCVDto extends ValidateDto {
     return value;
   })
   @IsString()
-  company_code: string;
+  company_id: string;
 }

@@ -20,6 +20,21 @@ export class GetListJobMappingDto extends ValidateDto {
   status: string;
 
   @ApiProperty({
+    type: String,
+    required: false,
+    description: 'company_id',
+  })
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (typeof value === 'string') {
+      return value.trim().split(/ |\,/gi);
+    }
+    return value;
+  })
+  @IsString()
+  company_id: string;
+
+  @ApiProperty({
     type: Number,
     required: true,
     example: 1710724385,

@@ -12,8 +12,8 @@ export class SendMailService {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'appvieclam123@gmail.com', // email dùng để gửi cho người khác. cái này khai báo biến cục bộ để trong config dev
-        pass: 'vieclam123@', // Your password   .. cái này khai báo biến cục bộ để trong config dev
+        user: 'hieubmt0129@gmail.com', // email dùng để gửi cho người khác. cái này khai báo biến cục bộ để trong config dev
+        pass: '', // Your password   .. cái này khai báo biến cục bộ để trong config dev
       },
       tls: {
         rejectUnauthorized: false,

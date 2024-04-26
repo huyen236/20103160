@@ -6,6 +6,7 @@ import { IUserDocument, IUserSessionDocument } from 'src/interfaces';
 import { SendMailService } from './send-mail.service';
 import { LoginDto } from 'src/dtos/login.dto';
 import { RegisterDto, UpdateUserDto } from 'src/dtos';
+import { ChangePassDto } from 'src/dtos/user';
 
 @Injectable()
 export class UsersService {
@@ -104,13 +105,15 @@ export class UsersService {
     if (checkEmail) {
       throw new Error('email da duoc dang ki');
     }
-    return await this.userModel.create({
+    const result = await this.userModel.create({
       name,
       email,
       password,
       phone,
       address,
     });
+    // @ts-ignore
+    return result.docs;
   }
 
   //update thong tin nguoi login va update chi tiet cua user hoac admin (co the dung update cho cv luon)
@@ -163,7 +166,7 @@ export class UsersService {
       throw new Error('email không chính xác');
     }
     const { id } = checkMail;
-    const api = `http://221.132.33.183:4050/api/users/change-pass-mail/${id}`;
+    const api = `localhost:4050/api/users/change-pass-mail/${id}`;
     await this.sendMailService.sendMail(
       email,
       email,
@@ -181,12 +184,12 @@ export class UsersService {
     );
   }
 
-  async changePasswordApp(body: any) {
-    const { password, id } = body;
+  async changePasswordApp(body: ChangePassDto, id: string) {
+    const { newPassword, oldPassword } = body;
     return await this.userModel.findOneAndUpdate(
-      { _id: id },
+      { _id: id, password: oldPassword },
       {
-        password, // password  mặc định
+        password: newPassword, // password  mặc định
       },
     );
   }

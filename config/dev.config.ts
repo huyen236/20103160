@@ -6,5 +6,5 @@ export const DevConfig = {
   fv_token_expires_in: 360000,
   mongoDb: {
     db_topcv_url:
-      'mongodb://mongodb:27017/topcv',
+      'mongodb://221.132.33.183:27017/topcv',
 }}

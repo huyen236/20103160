@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model, Types } from 'mongoose';
+import { GetListJobMappingDto } from 'src/dtos';
+import { CreateJobDto } from 'src/dtos/job/create-job.dto';
+import { CompanyNotFound } from 'src/exceptions';
 import { ICareerDocument, IUserDocument } from 'src/interfaces';
 import { ICompanyDocument } from 'src/interfaces/company.interface';
 import { IJobDocument } from 'src/interfaces/job.interface';
@@ -12,30 +15,27 @@ export class JobsService {
     @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
     @InjectModel('company')
     private readonly companyModel: Model<ICompanyDocument>,
-    @InjectModel('careers') private readonly careerModel: Model<ICareerDocument>,
-  ) { }
+    @InjectModel('careers')
+    private readonly careerModel: Model<ICareerDocument>,
+  ) {}
 
   // tao job cho cong ty
-  async createJob(body: any, User: any) {
+  async createJob(body: CreateJobDto, User: any) {
     // User lấy giá trị từ @User
     const {
       job_name,
       description_job,
-      code,
       wage,
       benefits,
       address,
       request_cv,
       company_id,
-      createdBy,
-      updatedBy,
-      deletedBy,
-      deletedAt,
       time_start,
       time_end,
-      career_id
+      career_id,
     } = body;
-    if (!User.is_admin) { // kiem tra xem phai la admin k 
+    if (!User.is_admin) {
+      // kiem tra xem phai la admin k
       throw new Error('Bạn không có quyền tạo job');
     }
     const checkCompany = await this.companyModel
@@ -45,37 +45,32 @@ export class JobsService {
       })
       .lean();
     if (checkCompany) {
-      throw new Error(
+      throw new CompanyNotFound(
         'Công ty không đúng hoặc không được liên kết với User admin',
       );
     }
-    const job = await this.jobModel.findOne({
-      code
-    })
-    if (job) {
-      throw new Error("job da ton tai code")
-    }
+    // const job = await this.jobModel.findOne({
+    //   code,
+    // });
+    // if (job) {
+    //   throw new Error('job da ton tai');
+    // }
     if (career_id) {
       const career = await this.careerModel.findOne({
-        _id: career_id
-      })
+        _id: career_id,
+      });
       if (!career) {
-        throw new Error("career khong ton tai")
+        throw new Error('career khong ton tai');
       }
     }
     const dataCreate = {
       job_name,
       description_job,
-      code,
       wage,
       benefits,
       address,
       request_cv,
       company_id,
-      createdBy,
-      updatedBy,
-      deletedBy,
-      deletedAt,
       time_start,
       time_end,
     };
@@ -83,7 +78,7 @@ export class JobsService {
   }
 
   // get list job cua cong ty cho user hoac admin thay
-  async getListJobs(body: any, User: any) {
+  async getListJobs(body: GetListJobMappingDto, User: any) {
     const checkUser = await this.userModel.findById(User?._id).lean();
     if (!checkUser) {
       throw new Error('User không tồn tại');
@@ -102,6 +97,28 @@ export class JobsService {
       company_code: checkCompany.code,
       filter,
     });
+  }
+
+  filter(body: any) {
+    const filter: FilterQuery<IJobDocument> = {};
+    // to_time is than from_time (Epoch Times)
+    const { from_time, to_time } = body;
+    if (from_time) {
+      filter.created_at = {
+        $gte: from_time,
+      };
+    }
+    if (to_time) {
+      (filter.created_at = filter.created_at),
+        {
+          $lte: from_time,
+        };
+    }
+    if (body.job_name) {
+      filter.job_name = { $regex: `.*${body.job_name}.*`, $options: 'i' };
+    }
+
+    return filter;
   }
 
   // xu ly tim kiem theo job name hoac vi tri dia diem muc luong

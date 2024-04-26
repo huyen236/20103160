@@ -32,9 +32,8 @@ export class UpdateUserDto {
   @ApiProperty({
     description: 'skill',
   })
-  @IsString()
   @IsOptional()
-  skill: string;
+  skill: any;
 
   @ApiProperty({
     description: 'experience',

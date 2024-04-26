@@ -13,7 +13,7 @@ import { ResponseUtil } from '../utils/response.util';
 import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { JobMappingService } from 'src/services/job-mapping.service';
-import { ApplyCVDto } from 'src/dtos';
+import { ApplyCVDto, GetListJobMappingDto, approvalCVDto } from 'src/dtos';
 
 @Controller('job-mapping')
 export class JobMappingController {
@@ -23,7 +23,7 @@ export class JobMappingController {
   ) {}
   @UseGuards(JwtAuthGuard)
   @Get('')
-  async infoJob(@Body() body: any, @Res() res: any, @User() user: any) {
+  async infoJob(@Body() body: GetListJobMappingDto, @Res() res: any, @User() user: any) {
     try {
       const result = await this.jobMappingService.getListJobApply(body, user);
       return this.responseUtil.success({ res, data: result });
@@ -49,7 +49,7 @@ export class JobMappingController {
   }
 
   @Post('/approvalCV')
-  async approval(@Body() body: any, @Res() res: any, @User() user: any) {
+  async approval(@Body() body: approvalCVDto, @Res() res: any, @User() user: any) {
     try {
       const result = await this.jobMappingService.approvalCV(body, user);
       return this.responseUtil.success({ res, data: result });
