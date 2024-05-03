@@ -23,7 +23,7 @@ const CompanySchema = new mongoose.Schema(
       updatedAt: 'updated_at',
       currentTime: () => Date.now(),
     },
-    collection: 'users',
+    collection: 'companys',
     autoIndex: true,
     autoCreate: true,
     toJSON: { virtuals: true },

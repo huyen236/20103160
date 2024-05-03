@@ -19,7 +19,7 @@ export class StatisticService {
     private readonly jobMappingModel: Model<IJobMappingDocument>,
     @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
     @InjectModel('users') private readonly userModel: Model<IJobDocument>,
-    @InjectModel('company')
+    @InjectModel('companys')
     private readonly companyModel: Model<ICompanyDocument>,
     @InjectModel('careers')
     private readonly careerModel: Model<ICareerDocument>,

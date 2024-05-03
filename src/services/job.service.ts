@@ -13,7 +13,7 @@ export class JobsService {
   constructor(
     @InjectModel('users') private readonly userModel: Model<IUserDocument>,
     @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
-    @InjectModel('company')
+    @InjectModel('companys')
     private readonly companyModel: Model<ICompanyDocument>,
     @InjectModel('careers')
     private readonly careerModel: Model<ICareerDocument>,

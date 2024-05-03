@@ -14,7 +14,7 @@ export class JobMappingService {
     private readonly jobMappingModel: Model<IUserDocument>,
     @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
     @InjectModel('users') private readonly userModel: Model<IJobDocument>,
-    @InjectModel('company')
+    @InjectModel('companys')
     private readonly companyModel: Model<ICompanyDocument>,
   ) {}
 

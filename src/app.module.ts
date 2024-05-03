@@ -52,7 +52,7 @@ import CareerSchema from './schema/careers.schema';
     MongooseModule.forFeature([
       { name: 'users', schema: UserSchema },
       { name: 'jobs', schema: JobSchema },
-      { name: 'company', schema: CompanySchema },
+      { name: 'companys', schema: CompanySchema },
       { name: 'job-mapping', schema: JobMappingSchema },
       { name: 'user-session', schema: UserSessionSchema },
       { name: 'careers', schema: CareerSchema },

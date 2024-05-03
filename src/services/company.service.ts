@@ -14,7 +14,7 @@ export class CompanysService {
   constructor(
     @InjectModel('users') private readonly userModel: Model<IUserDocument>,
     // @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
-    @InjectModel('company')
+    @InjectModel('companys')
     private readonly companyModel: Model<ICompanyDocument>,
     private readonly jwtService: JwtService,
   ) {}
