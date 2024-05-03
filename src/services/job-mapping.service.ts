@@ -6,6 +6,7 @@ import { GetListJobMappingDto, approvalCVDto } from 'src/dtos';
 import { IUserDocument } from 'src/interfaces';
 import { ICompanyDocument } from 'src/interfaces/company.interface';
 import { IJobDocument } from 'src/interfaces/job.interface';
+import { CompanysService } from './company.service';
 
 @Injectable()
 export class JobMappingService {
@@ -16,6 +17,7 @@ export class JobMappingService {
     @InjectModel('users') private readonly userModel: Model<IJobDocument>,
     @InjectModel('companys')
     private readonly companyModel: Model<ICompanyDocument>,
+    private readonly companysService: CompanysService,
   ) {}
 
   // tao job cho cong ty
@@ -39,6 +41,7 @@ export class JobMappingService {
   }
 
   async approvalCV(body: approvalCVDto, user: any) {
+    this.companysService.checkAccount(user);
     const company = await this.companyModel.findOne({
       admin_id: user?._id,
     });

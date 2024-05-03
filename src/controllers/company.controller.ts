@@ -25,20 +25,24 @@ export class CompanyController {
   // truyen token . chua lam phan quyen
   @UseGuards(JwtAuthGuard)
   @Get('/:id')
-  async infoJob(@Param('id') id: string, @Res() res: any, @User() user: any) {
+  async infoJob(@Res() res: any, @User() user: any) {
     try {
-      const result = await this.companysService.getInfoCompany(id);
+      const result = await this.companysService.getInfoCompany(user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
       return res.status(422).send({
         status: 'failed',
-        message:error.message
+        message: error.message,
       });
     }
   }
 
   @Post('/register')
-  async register(@Body() body: RegisterCompanyDto, @Res() res: any, @User() user: any) {
+  async register(
+    @Body() body: RegisterCompanyDto,
+    @Res() res: any,
+    @User() user: any,
+  ) {
     try {
       const result = await this.companysService.createCompanyOnlyOne(
         body,
@@ -48,20 +52,24 @@ export class CompanyController {
     } catch (error) {
       return res.status(422).send({
         status: 'failed',
-        message:error.message
+        message: error.message,
       });
     }
   }
 
   @Put('/update/:id')
-  async update(@Body() body: UpdateCompanyDto, @Param('id') id: string, @Res() res: any) {
+  async update(
+    @Body() body: UpdateCompanyDto,
+    @Res() res: any,
+    @User() user: any,
+  ) {
     try {
-      const result = await this.companysService.updateCompany(body, id);
+      const result = await this.companysService.updateCompany(body, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
       return res.status(422).send({
         status: 'failed',
-        message:error.message
+        message: error.message,
       });
     }
   }

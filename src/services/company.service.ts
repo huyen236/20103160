@@ -19,11 +19,21 @@ export class CompanysService {
     private readonly jwtService: JwtService,
   ) {}
 
+  checkAccount(user: any, id?: string) {
+    if (!user?.is_admin) {
+      throw new Error(
+        'Bạn không có quyền hoặc không đúng dữ liệu của công ty bạn',
+      );
+    }
+    return true;
+  }
+
   // xu ly goi tao company va 1 tai khoan admin chi tao duoc 1 cong ty
-  async createCompanyOnlyOne(body: RegisterCompanyDto, User: any) {
+  async createCompanyOnlyOne(body: RegisterCompanyDto, user: any) {
+    const data = this.checkAccount(user);
     const checkCompany = await this.companyModel
       .findOne({
-        admin_id: User?._id,
+        admin_id: user?._id,
       })
       .lean();
     if (checkCompany) {
@@ -37,16 +47,16 @@ export class CompanysService {
       address_company,
       tax_code,
       link,
-      admin_id: User?._id,
+      admin_id: user?._id,
       code: `${name}-${phone}`,
     });
   }
 
   // get thong tin chi tiet cua cong ty
-  async getInfoCompany(id: string) {
+  async getInfoCompany(user: any) {
     const checkCompany = await this.companyModel
       .findOne({
-        _id: id,
+        admin_id: user?._id,
       })
       .lean();
     if (!checkCompany) {
@@ -56,10 +66,11 @@ export class CompanysService {
   }
 
   // update thong tin cua cong ty
-  async updateCompany(body: UpdateCompanyDto, id: string) {
+  async updateCompany(body: UpdateCompanyDto, user: any) {
+    const data = this.checkAccount(user);
     const checkCompany = await this.companyModel
       .findOne({
-        admin_id: id,
+        admin_id: user?._id,
       })
       .lean();
     if (!checkCompany) {

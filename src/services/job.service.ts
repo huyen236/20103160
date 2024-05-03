@@ -7,6 +7,7 @@ import { CompanyNotFound } from 'src/exceptions';
 import { ICareerDocument, IUserDocument } from 'src/interfaces';
 import { ICompanyDocument } from 'src/interfaces/company.interface';
 import { IJobDocument } from 'src/interfaces/job.interface';
+import { CompanysService } from './company.service';
 
 @Injectable()
 export class JobsService {
@@ -17,10 +18,13 @@ export class JobsService {
     private readonly companyModel: Model<ICompanyDocument>,
     @InjectModel('careers')
     private readonly careerModel: Model<ICareerDocument>,
+    private readonly companysService: CompanysService,
   ) {}
 
   // tao job cho cong ty
-  async createJob(body: CreateJobDto, User: any) {
+  async createJob(body: CreateJobDto, user: any) {
+    this.companysService.checkAccount(user);
+    const company = await this.companysService.getInfoCompany(user);
     // User lấy giá trị từ @User
     const {
       job_name,
@@ -29,26 +33,25 @@ export class JobsService {
       benefits,
       address,
       request_cv,
-      company_id,
       time_start,
       time_end,
       career_id,
     } = body;
-    if (!User.is_admin) {
+    if (!user.is_admin) {
       // kiem tra xem phai la admin k
       throw new Error('Bạn không có quyền tạo job');
     }
-    const checkCompany = await this.companyModel
-      .findOne({
-        admin_id: User?._id,
-        _id: company_id,
-      })
-      .lean();
-    if (checkCompany) {
-      throw new CompanyNotFound(
-        'Công ty không đúng hoặc không được liên kết với User admin',
-      );
-    }
+    // const checkCompany = await this.companyModel
+    //   .findOne({
+    //     admin_id: user?._id,
+    //     _id: company_id,
+    //   })
+    //   .lean();
+    // if (checkCompany) {
+    //   throw new CompanyNotFound(
+    //     'Công ty không đúng hoặc không được liên kết với User admin',
+    //   );
+    // }
     // const job = await this.jobModel.findOne({
     //   code,
     // });
@@ -70,7 +73,7 @@ export class JobsService {
       benefits,
       address,
       request_cv,
-      company_id,
+      company_id: company?._id,
       time_start,
       time_end,
     };
@@ -78,23 +81,16 @@ export class JobsService {
   }
 
   // get list job cua cong ty cho user hoac admin thay
-  async getListJobs(body: GetListJobMappingDto, User: any) {
-    const checkUser = await this.userModel.findById(User?._id).lean();
+  async getListJobs(body: GetListJobMappingDto, user: any) {
+    const checkUser = await this.userModel.findById(user?._id).lean();
     if (!checkUser) {
-      throw new Error('User không tồn tại');
+      throw new Error('User không tồn tại ');
     }
-    const checkCompany = await this.companyModel
-      .findOne({
-        is_admin: User.is_admin,
-      })
-      .lean();
-    if (!checkCompany) {
-      throw new Error('Company không tồn tại');
-    }
+    const company = await this.companysService.getInfoCompany(user);
     // tim kiem theo gi thi bo vo body goi no ra de trong ham filter nay
     const filter = this.getFilter(body);
     return await this.jobModel.find({
-      company_code: checkCompany.code,
+      company_id: company._id,
       filter,
     });
   }

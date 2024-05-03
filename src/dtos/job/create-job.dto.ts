@@ -70,21 +70,6 @@ export class CreateJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
-  })
-  @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
-  @IsString()
-  company_id: string;
-
-  @ApiProperty({
-    type: String,
-    required: false,
     description: 'description_job',
   })
   @IsOptional()

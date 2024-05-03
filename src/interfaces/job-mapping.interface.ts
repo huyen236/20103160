@@ -6,7 +6,6 @@ export interface IJobMappingDocument {
   updated_at?: number;
   user_id?: string;
   status?: string;
-  company_code?: string;
   createdBy?: string;
   updatedBy?: string;
   deletedBy?: string;
