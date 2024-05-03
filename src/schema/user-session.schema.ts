@@ -1,6 +1,7 @@
 import { Schema, Model } from 'mongoose';
+import { IUserSessionDocument } from 'src/interfaces';
 
-const UserSessionSchema = new Schema(
+const UserSessionSchema = new Schema<IUserSessionDocument>(
   {
     login_time: { type: Number },
     logout_time: { type: Number },

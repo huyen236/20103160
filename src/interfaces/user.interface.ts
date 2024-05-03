@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export interface IUserDocument {
   name?: string;
   email: string;
@@ -6,7 +8,7 @@ export interface IUserDocument {
   address?: string;
   is_admin?: boolean;
   gender?: string;
-  skill?: string;
+  skill?: [string];
   experience?: string;
   description_job?: string;
   specialized?: string;
@@ -17,4 +19,6 @@ export interface IUserDocument {
   updated_by?: string;
   updated_at?: number;
   active?: boolean;
+  deleted_by?: string;
+  deleted_at?: number;
 }

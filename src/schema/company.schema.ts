@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
+import { ICompanyDocument } from 'src/interfaces';
 
-const CompanySchema = new mongoose.Schema(
+const CompanySchema = new mongoose.Schema<ICompanyDocument>(
   {
     name: { type: String, default: null, required: true },
     email: { type: String, default: null, index: true, unique: true },
@@ -11,7 +12,7 @@ const CompanySchema = new mongoose.Schema(
     link: { type: String },
     admin_id: { type: String },
     deleted_by: { type: String, default: null, index: true },
-    deleted_at: { type: Date, default: null },
+    deleted_at: { type: Number, default: null },
     created_at: { type: Number, index: true },
     updated_at: { type: Number },
     created_by: { type: String, default: null },

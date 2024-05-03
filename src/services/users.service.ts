@@ -82,7 +82,10 @@ export class UsersService {
   }
 
   // get thong tin chi tiet cua ng login
-  async getUser(id: string) {
+  async getUser(id: string, userInfo: any) {
+    if (userInfo?._id !== id) {
+      throw new Error('ban khong co quyen truy cap thong tin');
+    }
     const user = await this.userModel
       .findOne({
         _id: id,
@@ -117,7 +120,10 @@ export class UsersService {
   }
 
   //update thong tin nguoi login va update chi tiet cua user hoac admin (co the dung update cho cv luon)
-  async updateInfoUser(body: UpdateUserDto, id: string) {
+  async updateInfoUser(body: UpdateUserDto, id: string, userInfo: any) {
+    if (userInfo?._id !== id) {
+      throw new Error('ban khong co quyen truy cap thong tin');
+    }
     const {
       gender,
       skill,

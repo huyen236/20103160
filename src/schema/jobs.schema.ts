@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
+import { IJobDocument } from 'src/interfaces';
 
-const JobSchema = new mongoose.Schema(
+const JobSchema = new mongoose.Schema<IJobDocument>(
   {
     job_name: { type: String, default: null, required: true },
     description_job: { type: String },
@@ -10,11 +11,11 @@ const JobSchema = new mongoose.Schema(
     address: { type: String },
     request_cv: { type: String },
     company_id: { type: String },
-    career_id: { type: mongoose.Types.ObjectId },
+    career_id: { type: String},
     time_start: { type: Date },
     time_end: { type: Date },
     deleted_by: { type: String, default: null, index: true },
-    deleted_at: { type: Date, default: null },
+    deleted_at: { type: Number, default: null },
     created_at: { type: Number, index: true },
     updated_at: { type: Number },
     created_by: { type: String, default: null },

@@ -1,9 +1,10 @@
 import * as mongoose from 'mongoose';
+import { IJobMappingDocument } from 'src/interfaces';
 
-const JobMappingSchema = new mongoose.Schema(
+const JobMappingSchema = new mongoose.Schema<IJobMappingDocument>(
   {
     job_id: { type: String, default: null, required: true },
-    status: { type: Boolean },
+    status: { type: String },
     user_id: { type: String },
     created_at: { type: Number, index: true },
     updated_at: { type: Number },
@@ -21,6 +22,6 @@ const JobMappingSchema = new mongoose.Schema(
     autoCreate: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 export default JobMappingSchema;

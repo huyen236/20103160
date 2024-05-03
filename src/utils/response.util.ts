@@ -19,7 +19,7 @@ export class ResponseUtil {
     const { data, res } = params;
     const result = {
       success: true,
-      ...data,
+      data,
     };
     res.status(200).send(result);
     return result;
@@ -33,7 +33,7 @@ export class ResponseUtil {
     res.status(200).send(result);
     return result;
   }
-  failed(params: { data?: any; res: Response, message: string }): any {
+  failed(params: { data?: any; res: Response; message: string }): any {
     let { data, message } = params;
 
     // if (!data || !data.error_code) {
@@ -44,7 +44,7 @@ export class ResponseUtil {
     const result = {
       success: false,
       ...data,
-      message
+      message,
     };
     params.res.status(422).send(result);
     return result;

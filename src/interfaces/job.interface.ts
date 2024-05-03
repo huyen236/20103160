@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 export interface IJobDocument {
   job_name?: string;
@@ -15,5 +15,7 @@ export interface IJobDocument {
   created_at?: number;
   updated_by?: string;
   updated_at?: number;
-  career_id?: Types.ObjectId | string
+  career_id: Types.ObjectId | string;
+  deleted_by?: string;
+  deleted_at?: number;
 }

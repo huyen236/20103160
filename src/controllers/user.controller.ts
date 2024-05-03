@@ -25,9 +25,9 @@ export class UserController {
 
   // truyen token . chua lam phan quyen
   @Get('/:id')
-  async infoUser(@Param('id') id: string, @Res() res: any) {
+  async infoUser(@Param('id') id: string, @Res() res: any, @User() user: any) {
     try {
-      const result = await this.usersService.getUser(id);
+      const result = await this.usersService.getUser(id, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
       return res.status(422).send({
@@ -81,9 +81,10 @@ export class UserController {
     @Body() body: UpdateUserDto,
     @Param('id') id: string,
     @Res() res: any,
+    @User() user: any,
   ) {
     try {
-      const result = await this.usersService.updateInfoUser(body, id);
+      const result = await this.usersService.updateInfoUser(body, id, user);
       return this.responseUtil.success({ res, data: result });
     } catch (error) {
       return res.status(422).send({
