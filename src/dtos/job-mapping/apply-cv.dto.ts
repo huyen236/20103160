@@ -22,7 +22,7 @@ export class ApplyCVDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'company_code',
+    description: 'user_id',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -32,5 +32,5 @@ export class ApplyCVDto extends ValidateDto {
     return value;
   })
   @IsString()
-  company_code: string;
+  user_id: string;
 }
