@@ -10,12 +10,6 @@ export class ApplyJobStatisticDto extends ValidateDto {
     description: 'job_code',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   job_id: string;
 
@@ -25,12 +19,6 @@ export class ApplyJobStatisticDto extends ValidateDto {
     description: 'company_code',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   company_id: string;
 

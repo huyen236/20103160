@@ -10,12 +10,6 @@ export class CreateCareerDto extends ValidateDto {
     description: 'name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   name: string;
 
@@ -25,12 +19,6 @@ export class CreateCareerDto extends ValidateDto {
     description: 'code',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   code: string;
 }

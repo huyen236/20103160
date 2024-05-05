@@ -10,12 +10,6 @@ export class UpdateCompanyDto extends ValidateDto {
     description: 'name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   name: string;
 
@@ -25,12 +19,6 @@ export class UpdateCompanyDto extends ValidateDto {
     description: 'email',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   email: string;
 
@@ -40,12 +28,6 @@ export class UpdateCompanyDto extends ValidateDto {
     description: 'phone',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   phone: string;
 
@@ -55,12 +37,6 @@ export class UpdateCompanyDto extends ValidateDto {
     description: 'address_company',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   address_company: string;
 
@@ -70,12 +46,6 @@ export class UpdateCompanyDto extends ValidateDto {
     description: 'tax_code',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   tax_code: string;
 
@@ -85,12 +55,6 @@ export class UpdateCompanyDto extends ValidateDto {
     description: 'link',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   link: string;
 }

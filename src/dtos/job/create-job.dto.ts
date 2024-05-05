@@ -10,12 +10,6 @@ export class CreateJobDto extends ValidateDto {
     description: 'description_job',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   description_job: string;
 
@@ -25,12 +19,6 @@ export class CreateJobDto extends ValidateDto {
     description: 'job_name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   job_name: string;
 
@@ -40,12 +28,6 @@ export class CreateJobDto extends ValidateDto {
     description: 'description_job',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   career_id: string;
 
@@ -73,12 +55,6 @@ export class CreateJobDto extends ValidateDto {
     description: 'request_cv',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   request_cv: string;
 
@@ -88,12 +64,6 @@ export class CreateJobDto extends ValidateDto {
     description: 'address',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   address: string;
 
@@ -103,12 +73,6 @@ export class CreateJobDto extends ValidateDto {
     description: 'benefits',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   benefits: string;
 
@@ -118,12 +82,6 @@ export class CreateJobDto extends ValidateDto {
     description: 'wage',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   wage: string;
 }

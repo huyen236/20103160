@@ -31,8 +31,7 @@ export class CareerController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('')
+  @Get('/list')
   async listJob(@Res() res: any) {
     try {
       const result = await this.careersService.getListCareer();

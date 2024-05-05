@@ -21,9 +21,9 @@ export class JobController {
     private readonly responseUtil: ResponseUtil,
     private readonly jobsService: JobsService,
   ) {}
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('/:id')
-  async infoJob(@Param('id') id: string, @Res() res: any, @User() user: any) {
+  async infoJob(@Param('id') id: string, @Res() res: any) {
     try {
       const result = await this.jobsService.getDetailJob(id);
       return this.responseUtil.success({ res, data: result });
@@ -48,7 +48,7 @@ export class JobController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('')
   async listJob(@Body() body: GetListJobDto, @Res() res: any, @User() user: any) {
     try {

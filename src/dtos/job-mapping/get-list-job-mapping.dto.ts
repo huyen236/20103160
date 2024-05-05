@@ -10,12 +10,6 @@ export class GetListJobMappingDto extends ValidateDto {
     description: 'Trạng thái apply',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   status: string;
 
@@ -25,12 +19,6 @@ export class GetListJobMappingDto extends ValidateDto {
     description: 'company_id',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   company_id: string;
 

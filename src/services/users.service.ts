@@ -16,7 +16,7 @@ export class UsersService {
     private readonly userSessionModel: Model<IUserSessionDocument>,
     private readonly jwtService: JwtService,
     private readonly sendMailService: SendMailService,
-  ) {}
+  ) { }
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.userModel.findOne({ email });
     if (user && user.password === password) {
@@ -99,7 +99,7 @@ export class UsersService {
 
   // dang ki tai khoan
   async register(body: RegisterDto) {
-    const { email, phone, name, password, address } = body;
+    const { email, phone, name, password, address, is_admin } = body;
     const checkEmail = await this.userModel
       .findOne({
         email,
@@ -114,6 +114,7 @@ export class UsersService {
       password,
       phone,
       address,
+      is_admin
     });
     // @ts-ignore
     return result.docs;

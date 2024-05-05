@@ -10,34 +10,28 @@ export class GetListJobDto extends ValidateDto {
     description: 'job_name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   job_name: string;
 
-  @ApiProperty({
-    type: Number,
-    required: true,
-    example: 1710724385,
-    description: 'Tìm kiếm: Từ ngày |  Cột: Ngày tạo',
-  })
-  @Type(() => Number)
-  @IsNumber()
-  time_start: number;
+  // @ApiProperty({
+  //   type: Number,
+  //   required: true,
+  //   example: 1710724385,
+  //   description: 'Tìm kiếm: Từ ngày |  Cột: Ngày tạo',
+  // })
+  // @Type(() => Number)
+  // @IsNumber()
+  // time_start: number;
 
-  @ApiProperty({
-    type: Number,
-    required: true,
-    example: 1710724385,
-    description: 'Tìm kiếm: Tới ngày |  Cột: Ngày tạo',
-  })
-  @Type(() => Number)
-  @IsNumber()
-  time_end: number;
+  // @ApiProperty({
+  //   type: Number,
+  //   required: true,
+  //   example: 1710724385,
+  //   description: 'Tìm kiếm: Tới ngày |  Cột: Ngày tạo',
+  // })
+  // @Type(() => Number)
+  // @IsNumber()
+  // time_end: number;
 
   @ApiProperty({
     type: String,
@@ -45,12 +39,6 @@ export class GetListJobDto extends ValidateDto {
     description: 'job_name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   benefits: string;
 
@@ -60,12 +48,6 @@ export class GetListJobDto extends ValidateDto {
     description: 'job_name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   address: string;
 
@@ -75,12 +57,6 @@ export class GetListJobDto extends ValidateDto {
     description: 'job_name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   career_id: string;
 
@@ -90,12 +66,6 @@ export class GetListJobDto extends ValidateDto {
     description: 'job_name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   company_id: string;
 }

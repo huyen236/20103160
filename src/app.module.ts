@@ -149,7 +149,7 @@ export class AppModule implements NestModule {
         method: RequestMethod.POST,
       },
       {
-        path: 'careers',
+        path: 'careers/list',
         method: RequestMethod.GET,
       }
     );

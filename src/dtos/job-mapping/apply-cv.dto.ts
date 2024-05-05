@@ -10,12 +10,6 @@ export class ApplyCVDto extends ValidateDto {
     description: 'job_code',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   job_code: string;
 
@@ -25,12 +19,6 @@ export class ApplyCVDto extends ValidateDto {
     description: 'user_id',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   user_id: string;
 }

@@ -88,10 +88,10 @@ export class JobsService {
     }
     const company = await this.companysService.getInfoCompany(user);
     // tim kiem theo gi thi bo vo body goi no ra de trong ham filter nay
-    const filter = this.getFilter(body);
+    // const filter = this.getFilter(body);
     return await this.jobModel.find({
-      company_id: company._id,
-      filter,
+      company_id: company._id
+      // filter,
     });
   }
 

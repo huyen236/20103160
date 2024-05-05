@@ -10,12 +10,6 @@ export class GetListCareerDto extends ValidateDto {
     description: 'job_name',
   })
   @IsOptional()
-  @Transform(({ value }) => {
-    if (typeof value === 'string') {
-      return value.trim().split(/ |\,/gi);
-    }
-    return value;
-  })
   @IsString()
   name: string;
 }
