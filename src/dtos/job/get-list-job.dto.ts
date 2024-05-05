@@ -3,11 +3,11 @@ import { Transform, Type } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 import ValidateDto from '../validate.dto';
 
-export class GetListJobMappingDto extends ValidateDto {
+export class GetListJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'Trạng thái apply',
+    description: 'job_name',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -17,7 +17,7 @@ export class GetListJobMappingDto extends ValidateDto {
     return value;
   })
   @IsString()
-  status: string;
+  job_name: string;
 
   @ApiProperty({
     type: Number,
@@ -27,7 +27,7 @@ export class GetListJobMappingDto extends ValidateDto {
   })
   @Type(() => Number)
   @IsNumber()
-  from_time: number;
+  time_start: number;
 
   @ApiProperty({
     type: Number,
@@ -37,5 +37,65 @@ export class GetListJobMappingDto extends ValidateDto {
   })
   @Type(() => Number)
   @IsNumber()
-  to_time: number;
+  time_end: number;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'job_name',
+  })
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (typeof value === 'string') {
+      return value.trim().split(/ |\,/gi);
+    }
+    return value;
+  })
+  @IsString()
+  benefits: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'job_name',
+  })
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (typeof value === 'string') {
+      return value.trim().split(/ |\,/gi);
+    }
+    return value;
+  })
+  @IsString()
+  address: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'job_name',
+  })
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (typeof value === 'string') {
+      return value.trim().split(/ |\,/gi);
+    }
+    return value;
+  })
+  @IsString()
+  career_id: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'job_name',
+  })
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (typeof value === 'string') {
+      return value.trim().split(/ |\,/gi);
+    }
+    return value;
+  })
+  @IsString()
+  company_id: string;
 }

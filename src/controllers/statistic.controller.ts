@@ -65,7 +65,7 @@ export class StatisticController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/admin/approval-job')
+  @Get('/admin/approval-job') // biet duoc bao nhieu nguoi ung tuyen vo
   async adminApprovalJob(@Query() query: approvalJobStatisticDto, @Res() res: any, @User() user: any) {
     try {
       const result = await this.statisticService.adminJobApprovalStatistic(query, user);

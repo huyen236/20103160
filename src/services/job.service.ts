@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model, Types } from 'mongoose';
-import { GetListJobMappingDto } from 'src/dtos';
+import { GetListJobDto, GetListJobMappingDto } from 'src/dtos';
 import { CreateJobDto } from 'src/dtos/job/create-job.dto';
 import { CompanyNotFound } from 'src/exceptions';
 import { ICareerDocument, IUserDocument } from 'src/interfaces';
@@ -81,7 +81,7 @@ export class JobsService {
   }
 
   // get list job cua cong ty cho user hoac admin thay
-  async getListJobs(body: GetListJobMappingDto, user: any) {
+  async getListJobs(body: GetListJobDto, user: any) {
     const checkUser = await this.userModel.findById(user?._id).lean();
     if (!checkUser) {
       throw new Error('User không tồn tại ');

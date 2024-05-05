@@ -3,11 +3,11 @@ import { Transform, Type } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 import ValidateDto from '../validate.dto';
 
-export class approvalJobStatisticDto extends ValidateDto {
+export class GetListCareerDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'company_code',
+    description: 'job_name',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -17,23 +17,5 @@ export class approvalJobStatisticDto extends ValidateDto {
     return value;
   })
   @IsString()
-  company_id?: string;
-
-  @ApiProperty({
-    type: Number,
-    required: false,
-    description: 'from_time',
-  })
-  @IsOptional()
-  @IsNumber()
-  from_time?: number;
-
-  @ApiProperty({
-    type: Number,
-    required: false,
-    description: 'from_time',
-  })
-  @IsOptional()
-  @IsNumber()
-  to_time?: number;
+  name: string;
 }

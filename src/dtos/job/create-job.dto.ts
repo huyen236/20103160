@@ -70,7 +70,7 @@ export class CreateJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'description_job',
+    description: 'request_cv',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -85,7 +85,7 @@ export class CreateJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
+    description: 'address',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -100,7 +100,7 @@ export class CreateJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'description_job',
+    description: 'benefits',
   })
   @IsOptional()
   @Transform(({ value }) => {
@@ -115,7 +115,7 @@ export class CreateJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
+    description: 'wage',
   })
   @IsOptional()
   @Transform(({ value }) => {

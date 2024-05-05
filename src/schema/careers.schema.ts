@@ -4,7 +4,7 @@ import { ICareerDocument } from 'src/interfaces';
 const CareerSchema = new mongoose.Schema<ICareerDocument>(
   {
     name: { type: String, default: null, required: true },
-    code: { type: String },
+    code: { type: String, required: true },
     deleted_by: { type: String, default: null },
     deleted_at: { type: Number, default: null },
     created_at: { type: Number, index: true },

@@ -13,7 +13,7 @@ import { ResponseUtil } from '../utils/response.util';
 import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { CreateJobDto } from 'src/dtos/job/create-job.dto';
-import { GetListJobMappingDto } from 'src/dtos';
+import { GetListJobDto } from 'src/dtos';
 
 @Controller('jobs')
 export class JobController {
@@ -50,7 +50,7 @@ export class JobController {
 
   @UseGuards(JwtAuthGuard)
   @Get('')
-  async listJob(@Body() body: GetListJobMappingDto, @Res() res: any, @User() user: any) {
+  async listJob(@Body() body: GetListJobDto, @Res() res: any, @User() user: any) {
     try {
       const result = await this.jobsService.getListJobs(body, user);
       return this.responseUtil.success({ res, data: result });

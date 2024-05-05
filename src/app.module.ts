@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { APP_CONFIG } from 'config';
 import {
+  CareersService,
   CompanysService,
   HealthService,
   JobMappingService,
@@ -36,6 +37,7 @@ import UserSessionSchema from './schema/user-session.schema';
 import { ChecktokenMiddleware } from './middlewares/checktoken.middleware';
 import { HashUtil } from './utils/hash.util';
 import CareerSchema from './schema/careers.schema';
+import { CareerController } from './controllers/career.controller';
 
 @Module({
   imports: [
@@ -64,7 +66,8 @@ import CareerSchema from './schema/careers.schema';
     JobController,
     CompanyController,
     JobMappingController,
-    StatisticController
+    StatisticController,
+    CareerController
   ],
   providers: [
     HealthService,
@@ -76,7 +79,8 @@ import CareerSchema from './schema/careers.schema';
     SendMailService,
     JobMappingService,
     HashUtil,
-    StatisticService
+    StatisticService,
+    CareersService
   ],
 })
 export class AppModule implements NestModule {
@@ -93,7 +97,7 @@ export class AppModule implements NestModule {
         method: RequestMethod.PUT,
       },
       {
-        path: 'jobs/register',
+        path: 'jobs/create',
         method: RequestMethod.POST,
       },
       {
@@ -138,6 +142,14 @@ export class AppModule implements NestModule {
       },
       {
         path: 'statistic/admin/approval-job',
+        method: RequestMethod.GET,
+      },
+      {
+        path: 'careers/create',
+        method: RequestMethod.POST,
+      },
+      {
+        path: 'careers',
         method: RequestMethod.GET,
       }
     );
