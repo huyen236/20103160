@@ -7,7 +7,7 @@ export class GetListCareerDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
+    description: 'name',
   })
   @IsOptional()
   @IsString()

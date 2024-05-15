@@ -14,7 +14,8 @@ import { User } from 'src/decorators';
 import { LoginDto } from 'src/dtos/login.dto';
 import { RegisterDto, UpdateUserDto } from 'src/dtos';
 import { ChangePassDto } from 'src/dtos/user';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(

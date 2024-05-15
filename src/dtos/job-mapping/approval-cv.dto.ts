@@ -7,7 +7,7 @@ export class approvalCVDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'Trạng thái apply',
+    description: 'status',
   })
   @IsOptional()
   @IsString()

@@ -14,7 +14,9 @@ import { ResponseUtil } from '../utils/response.util';
 import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { ApplyJobStatisticDto, approvalJobStatisticDto } from 'src/dtos';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('statistic')
 @Controller('statistic')
 export class StatisticController {
   constructor(

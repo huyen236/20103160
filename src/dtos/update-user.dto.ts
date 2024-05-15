@@ -57,14 +57,14 @@ export class UpdateUserDto {
   specialized: string;
 
   @ApiProperty({
-    description: 'specialized',
+    description: 'industry',
   })
   @IsString()
   @IsOptional()
   industry: string;
 
   @ApiProperty({
-    description: 'specialized',
+    description: 'province',
   })
   @IsString()
   @IsOptional()

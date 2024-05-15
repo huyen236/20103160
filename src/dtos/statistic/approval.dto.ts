@@ -7,7 +7,7 @@ export class approvalJobStatisticDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'company_code',
+    description: 'company_id',
   })
   @IsOptional()
   @IsString()
@@ -25,7 +25,7 @@ export class approvalJobStatisticDto extends ValidateDto {
   @ApiProperty({
     type: Number,
     required: false,
-    description: 'from_time',
+    description: 'to_time',
   })
   @IsOptional()
   @IsNumber()

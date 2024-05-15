@@ -4,14 +4,6 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 import ValidateDto from '../validate.dto';
 
 export class RegisterCompanyDto extends ValidateDto {
-  @ApiProperty({
-    type: String,
-    required: false,
-    description: 'name',
-  })
-  @IsOptional()
-  @IsString()
-  name: string;
 
   @ApiProperty({
     type: String,
@@ -21,6 +13,15 @@ export class RegisterCompanyDto extends ValidateDto {
   @IsOptional()
   @IsString()
   email: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'name',
+  })
+  @IsOptional()
+  @IsString()
+  name: string;
 
   @ApiProperty({
     type: String,
@@ -39,6 +40,7 @@ export class RegisterCompanyDto extends ValidateDto {
   @IsOptional()
   @IsString()
   address_company: string;
+
 
   @ApiProperty({
     type: String,

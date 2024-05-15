@@ -7,7 +7,7 @@ export class ApplyJobStatisticDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_code',
+    description: 'job_id',
   })
   @IsOptional()
   @IsString()
@@ -16,7 +16,7 @@ export class ApplyJobStatisticDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'company_code',
+    description: 'company_id',
   })
   @IsOptional()
   @IsString()
@@ -34,7 +34,7 @@ export class ApplyJobStatisticDto extends ValidateDto {
   @ApiProperty({
     type: Number,
     required: false,
-    description: 'from_time',
+    description: 'to_time',
   })
   @IsOptional()
   @IsNumber()

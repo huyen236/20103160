@@ -34,7 +34,7 @@ export class CreateJobDto extends ValidateDto {
   @ApiProperty({
     type: Number,
     required: false,
-    description: '23232323',
+    description: 'time_start',
   })
   @IsOptional()
   @IsNumber()
@@ -43,7 +43,7 @@ export class CreateJobDto extends ValidateDto {
   @ApiProperty({
     type: Number,
     required: false,
-    description: '222',
+    description: 'time_end',
   })
   @IsOptional()
   @IsNumber()

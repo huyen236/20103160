@@ -36,7 +36,7 @@ export class GetListJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
+    description: 'benefits',
   })
   @IsOptional()
   @IsString()
@@ -45,7 +45,7 @@ export class GetListJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
+    description: 'address',
   })
   @IsOptional()
   @IsString()
@@ -54,7 +54,7 @@ export class GetListJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
+    description: 'career_id',
   })
   @IsOptional()
   @IsString()
@@ -63,7 +63,7 @@ export class GetListJobDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_name',
+    description: 'company_id',
   })
   @IsOptional()
   @IsString()

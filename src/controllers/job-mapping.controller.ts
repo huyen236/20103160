@@ -14,7 +14,9 @@ import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { JobMappingService } from 'src/services/job-mapping.service';
 import { ApplyCVDto, GetListJobMappingDto, approvalCVDto } from 'src/dtos';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('job-mapping')
 @Controller('job-mapping')
 export class JobMappingController {
   constructor(

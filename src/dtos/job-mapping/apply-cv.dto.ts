@@ -7,11 +7,11 @@ export class ApplyCVDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'job_code',
+    description: 'job_id',
   })
   @IsOptional()
   @IsString()
-  job_code: string;
+  job_id: string;
 
   @ApiProperty({
     type: String,

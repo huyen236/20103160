@@ -14,7 +14,9 @@ import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { CompanysService } from 'src/services';
 import { RegisterCompanyDto, UpdateCompanyDto } from 'src/dtos/company';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('companys')
 @Controller('companys')
 export class CompanyController {
   constructor(

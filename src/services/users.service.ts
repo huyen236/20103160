@@ -135,6 +135,7 @@ export class UsersService {
       province,
       name,
       phone,
+      address,
     } = body;
     const checkUser = await this.userModel
       .findOne({
@@ -154,6 +155,7 @@ export class UsersService {
       province,
       name,
       phone,
+      address,
     };
     return this.userModel.updateOne(
       {

@@ -4,13 +4,13 @@ import {
   Get,
   Post,
   Res,
-  UseGuards,
 } from '@nestjs/common';
 import { CareersService } from '../services';
 import { ResponseUtil } from '../utils/response.util';
-import { JwtAuthGuard } from 'src/guards';
 import { CreateCareerDto } from 'src/dtos';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('careers')
 @Controller('careers')
 export class CareerController {
   constructor(

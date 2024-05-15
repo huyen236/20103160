@@ -7,7 +7,7 @@ export class GetListJobMappingDto extends ValidateDto {
   @ApiProperty({
     type: String,
     required: false,
-    description: 'Trạng thái apply',
+    description: 'status',
   })
   @IsOptional()
   @IsString()
@@ -26,7 +26,7 @@ export class GetListJobMappingDto extends ValidateDto {
     type: Number,
     required: true,
     example: 1710724385,
-    description: 'Tìm kiếm: Từ ngày |  Cột: Ngày tạo',
+    description: 'from_time',
   })
   @Type(() => Number)
   @IsNumber()
@@ -36,7 +36,7 @@ export class GetListJobMappingDto extends ValidateDto {
     type: Number,
     required: true,
     example: 1710724385,
-    description: 'Tìm kiếm: Tới ngày |  Cột: Ngày tạo',
+    description: 'to_time',
   })
   @Type(() => Number)
   @IsNumber()
