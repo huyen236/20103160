@@ -20,10 +20,9 @@ export class JobMappingService {
     private readonly companysService: CompanysService,
   ) {}
 
-  // tao job cho cong ty
 
   async applyCV(body: any, user: any) {
-    const { job_id, company_code } = body;
+    const { job_id } = body;
     const checkApplyJob = await this.jobMappingModel.findOne({
       user_id: user?._id,
       job_id,
@@ -36,7 +35,6 @@ export class JobMappingService {
       user_id: user?._id,
       status: 'submit',
     };
-    // status: submit, success, reject
     return await this.jobMappingModel.create(data);
   }
 
@@ -48,7 +46,6 @@ export class JobMappingService {
     if (!company) {
       throw new Error('khong phai admin cua cong ty');
     }
-    //status = success
     const { job_id, company_id, status } = body;
     const job = await this.jobModel.findOne({
       job_id,
@@ -84,7 +81,6 @@ export class JobMappingService {
     const filter = {
       status,
       company_id,
-      // filter time create_at nua
     };
     const jobApply = await this.jobMappingModel.find({
       filter,

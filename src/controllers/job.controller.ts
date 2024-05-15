@@ -4,13 +4,10 @@ import {
   Get,
   Param,
   Post,
-  Req,
   Res,
-  UseGuards,
 } from '@nestjs/common';
-import { HealthService, JobsService, UsersService } from '../services';
+import { JobsService } from '../services';
 import { ResponseUtil } from '../utils/response.util';
-import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
 import { CreateJobDto } from 'src/dtos/job/create-job.dto';
 import { GetListJobDto } from 'src/dtos';
@@ -22,7 +19,6 @@ export class JobController {
     private readonly responseUtil: ResponseUtil,
     private readonly jobsService: JobsService,
   ) {}
-  // @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async infoJob(@Param('id') id: string, @Res() res: any) {
     try {
@@ -49,7 +45,6 @@ export class JobController {
     }
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get('')
   async listJob(@Body() body: GetListJobDto, @Res() res: any, @User() user: any) {
     try {

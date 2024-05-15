@@ -2,10 +2,8 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
   Put,
-  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
@@ -24,7 +22,6 @@ export class CompanyController {
     private readonly companysService: CompanysService,
   ) {}
 
-  // truyen token . chua lam phan quyen
   @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async infoJob(@Res() res: any, @User() user: any) {

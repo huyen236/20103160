@@ -25,10 +25,8 @@ export class StatisticService {
     private readonly careerModel: Model<ICareerDocument>,
   ) {}
 
-  // statistic by (time, job, all job, company)
   async applyJobByTimeStatistic(body: IApplyJobByTimeStatistic) {
     const filter: any = this.filter(body);
-    // by job. job_id === null | undefine by all job
     if (body.job_id) {
       const job = await this.jobModel.findOne({
         _id: body.job_id,
@@ -54,11 +52,9 @@ export class StatisticService {
       data: jobMapping,
       count: jobMapping.length,
     };
-    // status: submit, success, reject
     return data;
   }
 
-  // statistic by (time, job, all job, company)
   async jobStatistic(body: IJobApprovalStatistic) {
     const filter: any = this.filter(body);
     filter.company_id = body.company_id;
@@ -67,11 +63,9 @@ export class StatisticService {
       data: job,
       count: job.length,
     };
-    // status: submit, success, reject
     return data;
   }
 
-  // statistic by (time, job)
   async userJobApprovalStatistic(body: IJobApprovalStatistic, user: any) {
     const filter: any = this.filter(body);
     filter.status = STATUS.SUCCESS;
@@ -90,11 +84,9 @@ export class StatisticService {
       result,
       count: jobMapping.length,
     };
-    // status: submit, success, reject
     return data;
   }
 
-  // statistic by (time, job)
   async adminJobApprovalStatistic(body: IJobApprovalStatistic, user: any) {
     const filter: any = this.filter(body);
     filter.status = STATUS.SUCCESS;
@@ -122,13 +114,11 @@ export class StatisticService {
       result,
       count: jobMapping.length,
     };
-    // status: submit, success, reject
     return data;
   }
 
   filter(body: any) {
     const filter: FilterQuery<IJobMappingDocument> = {};
-    // to_time is than from_time (Epoch Times)
     const { from_time, to_time } = body;
     if (from_time) {
       filter.created_at = {

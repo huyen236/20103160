@@ -2,13 +2,10 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
-  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { HealthService, JobsService, UsersService } from '../services';
 import { ResponseUtil } from '../utils/response.util';
 import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';

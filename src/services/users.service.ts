@@ -38,16 +38,9 @@ export class UsersService {
     if (!checkLogin) {
       throw new Error('sai email hoac password');
     }
-    // const userSession = await this.userSessionModel.findOne({
-    //   user_id: checkLogin._id,
-    //   is_active: true,
-    // });
-    // if (userSession) {
-    //   throw new Error('đã được login');
-    // }
+
     const payload = {
       email,
-      // password,
       _id: checkLogin._id,
       phone: checkLogin.phone,
       id: checkLogin._id,
@@ -81,7 +74,6 @@ export class UsersService {
     );
   }
 
-  // get thong tin chi tiet cua ng login
   async getUser(id: string, userInfo: any) {
     if (userInfo?._id !== id) {
       throw new Error('ban khong co quyen truy cap thong tin');
@@ -97,7 +89,6 @@ export class UsersService {
     return user;
   }
 
-  // dang ki tai khoan
   async register(body: RegisterDto) {
     const { email, phone, name, password, address, is_admin } = body;
     const checkEmail = await this.userModel
@@ -120,7 +111,6 @@ export class UsersService {
     return result.docs;
   }
 
-  //update thong tin nguoi login va update chi tiet cua user hoac admin (co the dung update cho cv luon)
   async updateInfoUser(body: UpdateUserDto, id: string, userInfo: any) {
     if (userInfo?._id !== id) {
       throw new Error('ban khong co quyen truy cap thong tin');
@@ -165,7 +155,6 @@ export class UsersService {
     );
   }
 
-  // thieu api send mail de login khi tao tai khoan
 
   async ForgotPassword(email: string) {
     const checkMail = await this.userModel.findOne({
@@ -179,16 +168,15 @@ export class UsersService {
     await this.sendMailService.sendMail(
       email,
       email,
-      `You have requested a password reset. Click the following link to reset your password ${api}`, // link lấy từ api changeP
+      `You have requested a password reset. Click the following link to reset your password ${api}`,
     );
   }
 
-  // viet api link để cho user đổi mk mặc định
   async changeP(id: string) {
     return await this.userModel.updateOne(
       { _id: id },
       {
-        password: 'Abc12345', // password  mặc định
+        password: 'Abc12345',
       },
     );
   }
@@ -198,7 +186,7 @@ export class UsersService {
     return await this.userModel.findOneAndUpdate(
       { _id: id, password: oldPassword },
       {
-        password: newPassword, // password  mặc định
+        password: newPassword,
       },
     );
   }

@@ -12,9 +12,7 @@ import { IJobDocument } from 'src/interfaces/job.interface';
 @Injectable()
 export class CompanysService {
   constructor(
-    @InjectModel('users') private readonly userModel: Model<IUserDocument>,
-    // @InjectModel('jobs') private readonly jobModel: Model<IJobDocument>,
-    @InjectModel('companys')
+    @InjectModel('users') private readonly userModel: Model<IUserDocument>,    @InjectModel('companys')
     private readonly companyModel: Model<ICompanyDocument>,
     private readonly jwtService: JwtService,
   ) {}
@@ -28,7 +26,6 @@ export class CompanysService {
     return true;
   }
 
-  // xu ly goi tao company va 1 tai khoan admin chi tao duoc 1 cong ty
   async createCompanyOnlyOne(body: RegisterCompanyDto, user: any) {
     const data = this.checkAccount(user);
     const checkCompany = await this.companyModel
@@ -52,7 +49,7 @@ export class CompanysService {
     });
   }
 
-  // get thong tin chi tiet cua cong ty
+ 
   async getInfoCompany(user: any) {
     const checkCompany = await this.companyModel
       .findOne({
@@ -65,7 +62,6 @@ export class CompanysService {
     return checkCompany;
   }
 
-  // update thong tin cua cong ty
   async updateCompany(body: UpdateCompanyDto, user: any) {
     const data = this.checkAccount(user);
     const checkCompany = await this.companyModel

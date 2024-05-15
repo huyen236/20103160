@@ -1,15 +1,11 @@
 import {
-  Body,
   Controller,
   Get,
-  Param,
-  Post,
   Query,
-  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { HealthService, JobsService, StatisticService, UsersService } from '../services';
+import { StatisticService } from '../services';
 import { ResponseUtil } from '../utils/response.util';
 import { JwtAuthGuard } from 'src/guards';
 import { User } from 'src/decorators';
@@ -67,7 +63,7 @@ export class StatisticController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/admin/approval-job') // biet duoc bao nhieu nguoi ung tuyen vo
+  @Get('/admin/approval-job') 
   async adminApprovalJob(@Query() query: approvalJobStatisticDto, @Res() res: any, @User() user: any) {
     try {
       const result = await this.statisticService.adminJobApprovalStatistic(query, user);

@@ -24,7 +24,6 @@ export class UserController {
     private readonly usersService: UsersService,
   ) {}
 
-  // truyen token . chua lam phan quyen
   @Get('/:id')
   async infoUser(@Param('id') id: string, @Res() res: any, @User() user: any) {
     try {

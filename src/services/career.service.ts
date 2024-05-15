@@ -11,7 +11,6 @@ export class CareersService {
     private readonly careerModel: Model<ICareerDocument>,
   ) { }
 
-  // tao job cho cong ty
   async createCareer(body: CreateCareerDto) {
     const { code } = body
     const checkCareer = await this.careerModel.findOne({
@@ -23,7 +22,6 @@ export class CareersService {
     return await this.careerModel.create(body);
   }
 
-  // get list job cua cong ty cho user hoac admin thay
   async getListCareer() {
     return await this.careerModel.find();
   }
